@@ -75,5 +75,18 @@ post '/students/session' do
   end
 end
 
-put '/students/edit' do
+put '/students' do
+  # TODO: only ask for password if there has been an update
+  @student = current_student
+  if @student.authenticate(params[:password])
+    if @student.update(params[:student])
+      redirect '/students/profile'
+    else
+      @errors = @student.errors.full_messages
+      erb :'students/edit'
+    end
+  else
+    @errors << 'please enter your password' 
+    erb :'students/edit'
+  end
 end
