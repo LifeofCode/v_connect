@@ -5,14 +5,14 @@ get '/students' do
 end
 
 # student sign up page
-get '/student/register' do
+get '/students/register' do
   @student = nil
   @errors = [] #TODO: create a helper for checking errors
   erb :'students/new'
 end
 
 # student login page
-get '/student/session' do
+get '/students/session' do
   @student = nil
   @errors = []
   erb :'students/login'
@@ -32,7 +32,6 @@ post '/students' do
   @student.password = params[:password]
   @student.password_confirmation = params[:password2]
   if @student.save
-    # TODO: login and redirect to the student profile page
     session[:id] = @student.id
     redirect '/students/profile'
   else
@@ -43,7 +42,7 @@ post '/students' do
 end
 
 # login student
-post '/student/session' do
+post '/students/session' do
   @student = Student.find_by(email: params[:email])
   @errors = []
   if @student && @student.authenticate(params[:password])

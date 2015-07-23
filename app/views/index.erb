@@ -1,8 +1,17 @@
 <h1>Home Page</h1>
-<h2>Student</h2>
-<a href='student/session'>Login</a>
-<a href='student/register'>Register</a>
 
-<h2>Organization</h2>
-<a href='organization/session'>Login</a>
-<a href='organization/register'>Register</a>
+<% if current_student? %>
+  I'm a student!
+  <a href='/logout'>logout</a>
+<% elsif current_org? %>
+  I'm an org!
+  <a href='/logout'>logout</a>
+<% else %>
+  <h2>Student</h2>
+  <a href='students/session'>login</a>
+  <a href='students/register'>register</a>
+
+  <h2>Organization</h2>
+  <a href='organizations/session'>login</a>
+  <a href='organizations/register'>register</a>
+<% end %>
