@@ -2,21 +2,18 @@
 <%= erb :'partials/_errors' %>
 <form method="post" action="/students">
   <div class="form-group">
-     <label>First Name</label>
     <input type="text" name="student[first_name]" class="form-control" placeholder="First Name">
   </div>
   <div class="form-group">
-     <label>Last Name</label>
     <input type="text" name="student[last_name]" class="form-control" placeholder="Last Name">
   </div>
   <div class="form-group">
-     <label>Email address</label>
     <input type="email" name="student[email]" class="form-control" placeholder="Email">
   </div>
   <div class="form-group">
-    <label>Password</label>
     <input type="password" name="password" class="form-control" placeholder="Password">
-    <input type="password" name="password2" class="form-control" placeholder="Enter Password Again">
+    <br>
+    <input type="password" name="password2" class="form-control" placeholder="Confirm Password">
   </div>
   <button type="submit" class="btn btn-default">Register</button>
 </form>

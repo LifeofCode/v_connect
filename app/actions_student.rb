@@ -6,15 +6,15 @@ get '/students' do
 end
 
 # student sign up page
-get '/student/register' do
-  @student = Student.new
+get '/students/register' do
+  @student = nil
   @errors = [] #TODO: create a helper for checking errors
   erb :'students/new'
 end
 
 # student login page
-get '/student/session' do
-  @student = Student.new
+get '/students/session' do
+  @student = nil
   @errors = []
   erb :'students/login'
 end
@@ -34,24 +34,34 @@ post '/students' do
   @student.password = params[:password]
   @student.password_confirmation = params[:password2]
   if @student.save
-    # TODO: login and redirect to the student profile page
-    redirect '/registered'
+    session[:id] = @student.id
+    redirect '/students/profile'
   else
     @errors = @student.errors.full_messages 
+    @student = nil
     erb :'students/new'
   end
 end
 
 # login student
-post '/student/session' do
+post '/students/session' do
   @student = Student.find_by(email: params[:email])
   @errors = []
   if @student && @student.authenticate(params[:password])
     session[:id] = @student.id
-    redirect '/loggedin'
+    redirect '/students/profile'
   else
+    @student = nil
     @errors << "Invalid login"
     erb :'students/login'
+  end
+end
+
+get '/students/profile' do
+  @student = Student.find_by(id: session[:id])
+  if @student
+    erb :'/students/show'
+  else redirect '/'
   end
 end
 
@@ -75,3 +85,5 @@ end
 #students need a favourite button on the list of organizations page
 #can only favourite once - button disappears if already favourited, replace with a star?
 #favoured organizations will show up on their profile page(already set up on separate favourites page)
+
+

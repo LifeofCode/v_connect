@@ -1,0 +1,25 @@
+<div class="col-lg-12">
+  <div class="col-lg-6">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Seine_wide.jpg" alt="..." class="img-thumbnail">
+    <h1 class = "profile-name"> <%= current_student.first_name%> <%= current_student.last_name %> </h1>
+    <div class = "profile-box">
+      <div class = "format">
+        <h3> About me </h3>
+        <h4> email: </h4> <%= current_student.email%>
+        <h4> phone number: </h4> <%= current_student.phone_number%>
+      </div>
+    </div>
+  </div>
+
+  <div class = "col-lg-6">
+    <div class = "profile-box">
+      <div class = "format">
+        <div class = "vertical-space-format">
+          <h3> Favourite organizations </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>

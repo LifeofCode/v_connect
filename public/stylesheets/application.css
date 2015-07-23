@@ -39,3 +39,30 @@
          -o-transform-origin: 100% 100%;
             transform-origin :100% 100%;
 }*/
+
+.profile-name {
+  display: block;
+  margin-top: 10px;
+}
+
+.profile-image.resize {
+  max-width: 10%; /* you can use % */
+  height: auto;
+  display: block;
+}
+
+.profile-box {
+  background-color: #F8F8F8;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.format {
+  margin-left:10px;
+  margin-bottom: 5000px;
+}
+
+.vertical-space-format {
+  text-size:4px;
+}
+
