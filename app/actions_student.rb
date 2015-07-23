@@ -6,16 +6,38 @@ end
 
 # student sign up page
 get '/students/register' do
-  @student = nil
-  @errors = [] #TODO: create a helper for checking errors
-  erb :'students/new'
+  if current_student?
+    redirect '/students/profile'
+  else
+    @student = nil
+    erb :'students/new'
+  end
 end
 
 # student login page
 get '/students/session' do
-  @student = nil
-  @errors = []
-  erb :'students/login'
+  if current_student?
+    redirect '/students/profile'
+  else
+    @student = nil
+    erb :'students/login'
+  end
+end
+
+get '/students/profile' do
+  if current_student?
+    erb :'/students/show'
+  else 
+    redirect '/'
+  end
+end
+
+get '/students/edit' do
+  if current_student?
+    erb :'/students/edit'
+  else
+    redirect '/'
+  end
 end
 
 #a student can see their favourite organizations
@@ -27,7 +49,6 @@ end
 
 # create new student
 post '/students' do
-  @errors = []
   @student = Student.new(params[:student])
   @student.password = params[:password]
   @student.password_confirmation = params[:password2]
@@ -44,7 +65,6 @@ end
 # login student
 post '/students/session' do
   @student = Student.find_by(email: params[:email])
-  @errors = []
   if @student && @student.authenticate(params[:password])
     session[:id] = @student.id
     redirect '/students/profile'
@@ -55,10 +75,5 @@ post '/students/session' do
   end
 end
 
-get '/students/profile' do
-  @student = Student.find_by(id: session[:id])
-  if @student
-    erb :'/students/show'
-  else redirect '/'
-  end
+put '/students/edit' do
 end

@@ -5,15 +5,22 @@ helpers do
   def current_student
     Student.find(session[:id]) if session[:id]
   end
+  
   def current_student?
     session[:id]
   end
+  
   def current_org
     Organization.find(session[:org_id]) if session[:org_id]
   end
+  
   def current_org?
     session[:org_id]
   end
+end
+
+before '/*' do
+  @errors =[]
 end
 
 get '/' do
