@@ -69,9 +69,9 @@ post '/favourite' do
   fav_found = Favourite.exists?(student_id: student_id, organization_id: params[:organization_id])
   @errors = []
   if fav_found
-    @errors << ["You've already favoured this organization, you can see it on your profile :)"]
-    "******************"
-    redirect '/organizations'  
+    @organizations = Organization.all
+    @errors << "You've already favoured this organization, you can see it on your profile :)"
+    erb :'/organizations/index'  
   else
     Favourite.create(
       student_id: student_id,
