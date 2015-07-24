@@ -79,5 +79,5 @@ end
 
 # show posts by organization
 get '/organizations/posts' do
-  erb :'/posts/show'
+  erb :'/opportunities/show'
 end

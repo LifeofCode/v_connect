@@ -1,5 +1,8 @@
-<% if current_org? %>
-  <% organization  = self %>
-<% end %>
+<% opportunties = Opportunity.where(organization_id: @organization.id) %>
 
-<%
+<% opportunties.each do |opportunity| %>
+
+   <h3><%= opportunity.title %> </h3>
+   <p><%= opportunity.content %></p>
+
+<% end %>
