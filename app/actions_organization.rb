@@ -2,10 +2,11 @@
 get '/organizations' do 
   #TODO: change when sessions/login/authorization is finished
   @student_favs = []
-  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student
+  @student_favs = Favourite.where(student_id: current_student.id).pluck(:organization_id)
   @organizations = Organization.all
   erb :'organizations/index'
 end
+
 
 # organization sign up page
 get '/organizations/register' do
@@ -21,8 +22,10 @@ get '/organizations/session' do
   erb :'organizations/login'
 end
 
+
 get '/organizations/profile' do
   auth_org!
+  @organization = current_org
   @students = @organization.students
   erb :'/organizations/show'
 end
@@ -30,6 +33,10 @@ end
 get '/organizations/edit' do
   auth_org!
   erb :'/organizations/edit'
+end
+get '/organizations/:id' do 
+  @organization = Organization.find(params[:id])
+  erb :'organizations/show'
 end
 
 #an organization can see a list of interested students
