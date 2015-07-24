@@ -1,11 +1,9 @@
 <% if @errors.any? %>
   <div class="alert alert-danger" role="alert">
     <strong>Something went wrong! :O :</strong>
-    <ul>
     <!-- change this so only an @errors array is passed in -->
       <% @errors.each do |user| %>
-        <li><%= user %></li>
+        <p><%= user %></p>
       <% end %>
-    </ul>
   </div>
 <% end %>
