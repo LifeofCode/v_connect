@@ -7,26 +7,16 @@ end
 
 # organization sign up page
 get '/organizations/register' do
-  if current_student?
-    redirect '/students/profile'
-  elsif current_org?
-    redirect '/organizations/profile'
-  else
-    @organization = Organization.new
-    erb :'organizations/new'
-  end
+  logged_in!
+  @organization = Organization.new
+  erb :'organizations/new'
 end
 
 # organization login page
 get '/organizations/session' do
-  if current_student?
-    redirect '/students/profile'
-  elsif current_org?
-    redirect '/organizations/profile'
-  else
-    @organization = Organization.new
-    erb :'organizations/login' #TODO: combine this with the student login
-  end
+  logged_in!
+  @organization = Organization.new
+  erb :'organizations/login' #TODO: combine this with the student login
 end
 
 get '/organizations/profile' do
@@ -43,7 +33,6 @@ end
 get '/organizations/:id/students' do
   #TODO: refactor erb file using partials
   auth_org!
-  @organization = Organization.find(params[:id])
   @students = @organization.students
   erb :'students/index'
 end
@@ -54,9 +43,7 @@ post '/organizations' do
   @organization.password = params[:password]
   @organization.password_confirmation = params[:password2]
   if @organization.save
-    session[:id] = @organization.id
-    session[:type] = 'organization'
-    redirect '/organizations/profile'
+    login_user(@organization.id, 'organization')
   else
     @errors = @organization.errors.full_messages 
     erb :'organizations/new'
@@ -67,9 +54,7 @@ end
 post '/organizations/session' do
   @org = Organization.find_by(email: params[:email])
   if @org && @org.authenticate(params[:password])
-    session[:id] = @org.id
-    session[:type] = 'organization'
-    redirect '/organizations/profile'
+    login_user(@organization.id, 'organization')
   else
     @errors << "Invalid login"
     erb :'organizations/login'
@@ -78,11 +63,10 @@ end
 
 put '/organizations' do
   auth_org!
-  @organization = current_org
-    if @organization.update(params[:org])
-      redirect '/organizations/profile'
-    else
-      @errors = @organization.errors.full_messages
-      erb :'organizations/edit'
-    end
+  if @organization.update(params[:org])
+    redirect '/organizations/profile'
+  else
+    @errors = @organization.errors.full_messages
+    erb :'organizations/edit'
+  end
 end

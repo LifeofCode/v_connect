@@ -6,31 +6,25 @@ end
 
 # student sign up page
 get '/students/register' do
-  if current_student?
-    redirect '/students/profile'
-  else
-    @student = nil
-    erb :'students/new'
-  end
+  # redirect to profile page if user is already logged in
+  logged_in!
+  # create a blank student so entered data can be saved when registration fails
+  @student = Student.new
+  erb :'students/new'
 end
 
 # student login page
 get '/students/session' do
-  if current_student?
-    redirect '/students/profile'
-  elsif current_org?
-    redirect '/organizations/profile'
-  else
-    @student = nil
-    erb :'students/login'
-  end
+  logged_in!
+  erb :'students/login'
 end
 
 get '/students/profile' do
-  auth_student! # redirect to home when not a student login
+  auth_student!
   erb :'/students/show'
 end
 
+# a student can edit their profile
 get '/students/edit' do
   auth_student!
   erb :'/students/edit'
@@ -38,7 +32,7 @@ end
 
 #a student can see their favourite organizations
 get '/students/:id/organizations' do
-  @student = Student.find(params[:id])
+  auth_student!
   @organizations = @student.organizations
   erb :'organizations/index'
 end
@@ -49,12 +43,9 @@ post '/students' do
   @student.password = params[:password]
   @student.password_confirmation = params[:password2]
   if @student.save
-    session[:id] = @student.id
-    session[:type] = 'student' # TODO: use constant?
-    redirect '/students/profile'
+    login_user(@student.id, 'student')
   else
     @errors = @student.errors.full_messages 
-    @student = nil
     erb :'students/new'
   end
 end
@@ -63,11 +54,8 @@ end
 post '/students/session' do
   @student = Student.find_by(email: params[:email])
   if @student && @student.authenticate(params[:password])
-    session[:id] = @student.id
-    session[:type] = 'student' # TODO: use constant?
-    redirect '/students/profile'
+    login_user(@student.id, 'student')
   else
-    @student = nil
     @errors << "Invalid login"
     erb :'students/login'
   end
@@ -75,7 +63,6 @@ end
 
 put '/students' do
   auth_student!
-  @student = current_student
   if @student.update(params[:student])
      redirect '/students/profile'
   else

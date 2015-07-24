@@ -2,14 +2,7 @@
 
 # TODO: authorize logged in student
 helpers do
-  def current_student
-    Student.find(session[:id]) if session[:id] && session[:type] == 'student' 
-  end
-  
-  def current_org
-    Organization.find(session[:id]) if session[:id] && session[:type] == 'organization'
-  end
-  
+
   def current_student?
     session[:id] && session[:type] == 'student'
   end
@@ -18,14 +11,29 @@ helpers do
     session[:id] && session[:type] == 'organization'
   end
 
+  # redirect to profile page if user is logged in
+  def logged_in!
+    return if ! (current_org? || current_student?)
+    redirect "/#{session[:type]}s/profile"
+  end
+
+  # set session user
+  def login_user(id, type)
+    session[:id] = id
+    session[:type] = type
+    redirect "/#{type}s/profile"
+  end
+
+  # redirect to home when a student is not logged in
+  # save current_student to @student otherwise
   def auth_student!
+    @student = Student.find(session[:id])
     return if current_student?
     redirect '/'
-    # headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
-    # halt 401, "Not authorized\n"
   end
 
   def auth_org!
+    @organization = Organization.find(session[:id])
     return if current_org?
     redirect '/'
   end
