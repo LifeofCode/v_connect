@@ -27,21 +27,13 @@ get '/students/session' do
 end
 
 get '/students/profile' do
-  if current_student?
-    erb :'/students/show'
-  elsif current_org?
-    redirect '/organizations/profile'
-  else 
-    redirect '/'
-  end
+  auth_student! # redirect to home when not a student login
+  erb :'/students/show'
 end
 
 get '/students/edit' do
-  if current_student?
-    erb :'/students/edit'
-  else
-    redirect '/'
-  end
+  auth_student!
+  erb :'/students/edit'
 end
 
 #a student can see their favourite organizations
@@ -58,6 +50,7 @@ post '/students' do
   @student.password_confirmation = params[:password2]
   if @student.save
     session[:id] = @student.id
+    session[:type] = 'student' # TODO: use constant?
     redirect '/students/profile'
   else
     @errors = @student.errors.full_messages 
@@ -71,6 +64,7 @@ post '/students/session' do
   @student = Student.find_by(email: params[:email])
   if @student && @student.authenticate(params[:password])
     session[:id] = @student.id
+    session[:type] = 'student' # TODO: use constant?
     redirect '/students/profile'
   else
     @student = nil
@@ -80,17 +74,12 @@ post '/students/session' do
 end
 
 put '/students' do
-  # TODO: only ask for password if there has been an update
+  auth_student!
   @student = current_student
-  if @student.authenticate(params[:password])
-    if @student.update(params[:student])
-      redirect '/students/profile'
-    else
-      @errors = @student.errors.full_messages
-      erb :'students/edit'
-    end
+  if @student.update(params[:student])
+     redirect '/students/profile'
   else
-    @errors << 'please enter your password' 
+    @errors = @student.errors.full_messages
     erb :'students/edit'
   end
 end

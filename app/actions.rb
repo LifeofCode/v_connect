@@ -3,31 +3,31 @@
 # TODO: authorize logged in student
 helpers do
   def current_student
-    Student.find(session[:id]) if session[:id]
-  end
-  
-  def current_student?
-    session[:id]
+    Student.find(session[:id]) if session[:id] && session[:type] == 'student' 
   end
   
   def current_org
-    Organization.find(session[:org_id]) if session[:org_id]
+    Organization.find(session[:id]) if session[:id] && session[:type] == 'organization'
+  end
+  
+  def current_student?
+    session[:id] && session[:type] == 'student'
   end
   
   def current_org?
-    session[:org_id]
+    session[:id] && session[:type] == 'organization'
   end
 
   def auth_student!
     return if current_student?
-    headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
-    halt 401, "Not authorized\n"
+    redirect '/'
+    # headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+    # halt 401, "Not authorized\n"
   end
 
   def auth_org!
     return if current_org?
-    headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
-    halt 401, "Not authorized\n"
+    redirect '/'
   end
 
 end
@@ -42,6 +42,6 @@ end
 
 get '/logout' do
   session[:id] = nil
-  session[:org_id] = nil
+  session[:type] = nil
   redirect '/'
 end

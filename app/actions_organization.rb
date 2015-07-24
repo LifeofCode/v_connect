@@ -30,27 +30,19 @@ get '/organizations/session' do
 end
 
 get '/organizations/profile' do
-  if current_org?
-    erb :'/organizations/show'
-  elsif 
-    current_student?
-    redirect '/students/profile'
-  else 
-    redirect '/'
-  end
+  auth_org!
+  erb :'/organizations/show'
 end
 
 get '/organizations/edit' do
-  if current_org?
-    erb :'/organizations/edit'
-  else
-    redirect '/'
-  end
+  auth_org!
+  erb :'/organizations/edit'
 end
 
 #an organization can see a list of interested students
 get '/organizations/:id/students' do
   #TODO: refactor erb file using partials
+  auth_org!
   @organization = Organization.find(params[:id])
   @students = @organization.students
   erb :'students/index'
@@ -62,8 +54,9 @@ post '/organizations' do
   @organization.password = params[:password]
   @organization.password_confirmation = params[:password2]
   if @organization.save
-    session[:org_id] = @organization.id
-    redirect '/organization/profile'
+    session[:id] = @organization.id
+    session[:type] = 'organization'
+    redirect '/organizations/profile'
   else
     @errors = @organization.errors.full_messages 
     erb :'organizations/new'
@@ -74,7 +67,8 @@ end
 post '/organizations/session' do
   @org = Organization.find_by(email: params[:email])
   if @org && @org.authenticate(params[:password])
-    session[:org_id] = @org.id
+    session[:id] = @org.id
+    session[:type] = 'organization'
     redirect '/organizations/profile'
   else
     @errors << "Invalid login"
@@ -83,17 +77,12 @@ post '/organizations/session' do
 end
 
 put '/organizations' do
-  # TODO: only ask for password if there has been an update
+  auth_org!
   @organization = current_org
-  if @organization.authenticate(params[:password])
     if @organization.update(params[:org])
       redirect '/organizations/profile'
     else
       @errors = @organization.errors.full_messages
       erb :'organizations/edit'
     end
-  else
-    @errors << 'please enter your password' 
-    erb :'organizations/edit'
-  end
 end
