@@ -4,6 +4,12 @@ get '/students' do
   erb :'students/index'
 end
 
+# organization can search for student by first and last names
+get '/students/search' do
+  @students = Student.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{params[:keyword].downcase}%", "%#{params[:keyword].downcase}%")
+  erb :'students/index'
+end
+
 # student sign up page
 get '/students/register' do
   # redirect to profile page if user is already logged in
