@@ -22,8 +22,9 @@ end
 #a student can see their favourite organizations
 get '/students/:id/organizations' do
   @errors = []
-  @student = Student.find(params[:id])
-  @organizations = @student.organizations
+  @student_favs = []
+  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student
+  @organizations = current_student.organizations
   erb :'organizations/index'
 end
 
@@ -58,8 +59,9 @@ post '/students/session' do
 end
 
 get '/students/profile' do
-  @student = Student.find_by(id: session[:id])
-  if @student
+  @organizations = current_student.organizations if current_student
+  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student 
+  if current_student
     erb :'/students/show'
   else 
     redirect '/'
@@ -71,7 +73,7 @@ post '/favourite' do
   @errors = []
   @student_favs = []
   @organizations = Organization.all
-  @student_favs = current_student.organizations.map {|organization| organization.id}
+  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student 
 
   if @fav_found
     @errors << "You've already favoured this organization, you can see it on your profile :)"

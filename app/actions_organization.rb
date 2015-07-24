@@ -2,7 +2,7 @@
 get '/organizations' do 
   #TODO: change when sessions/login/authorization is finished
   @student_favs = []
-  @student_favs = current_student.organizations.map {|organization| organization.id}
+  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student
   @errors = []
   @organizations = Organization.all
   erb :'organizations/index'
