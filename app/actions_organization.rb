@@ -24,6 +24,7 @@ end
 
 get '/organizations/profile' do
   @organization = Organization.find(session[:org_id])
+  @students = @organization.students
   if @organization
     erb :'/organizations/show'
   else 
