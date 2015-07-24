@@ -3,8 +3,10 @@
 
   <div class="col-lg-6">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Seine_wide.jpg" alt="..." class="img-thumbnail">
-    <h1 class = "profile-name"> <%= current_org.name%> </h1>
-    <a href = '/organizations/opportunities'> <div class = "btn-primary"> Add a post </div> </a>
+    <h1 class = "profile-name"> <%= current_org.name%> <small><a href='/organizations/edit'>edit profile</a></small></h1>
+    <a href = '/organizations/opportunities'> <div class = "btn btn-primary"> Add a post </div> </a>
+    
+        
     <div class = "profile-box">
       <div class = "format">
         <h3> Organization Info </h3>
