@@ -15,6 +15,13 @@
   border-radius: 5px;
 }
 
+.profile-link {
+  background-color: #F8F8F8;
+  margin-right: 10px;
+  border-radius: 5px;
+  height: 7em;
+}
+
 .format {
   margin-left:10px;
   margin-bottom: 5000px;

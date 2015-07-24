@@ -17,10 +17,10 @@ Favourite.create(organization_id: 3, student_id: 3)
 Favourite.create(organization_id: 3, student_id: 1)
 Favourite.create(organization_id: 1, student_id: 2)
 
-Post.create(organization_id: 1, title: 'Luna Agency', content: 'Currently looking for volunteers. Must be agent of love and justice!')
-Post.create(organization_id: 3, title: 'Artemis Agency', content: 'Currently looking for volunteers. Must be agent of love and courage!')
-Post.create(organization_id: 3, title: 'Tuxedo Men', content: 'Currently looking for volunteers. Must be agent of love and peace!')
-Post.create(organization_id: 2, title: 'Light Agency', content: 'Currently looking for volunteers. Must be agent of love and beauty!')
-Post.create(organization_id: 4, title: 'Sailor Squad', content: 'Currently looking for volunteers. Must be agent of love and intellect!')
+Opportunity.create(organization_id: 1, title: 'Luna Agency', content: 'Currently looking for volunteers. Must be agent of love and justice!')
+Opportunity.create(organization_id: 3, title: 'Artemis Agency', content: 'Currently looking for volunteers. Must be agent of love and courage!')
+Opportunity.create(organization_id: 3, title: 'Tuxedo Men', content: 'Currently looking for volunteers. Must be agent of love and peace!')
+Opportunity.create(organization_id: 2, title: 'Light Agency', content: 'Currently looking for volunteers. Must be agent of love and beauty!')
+Opportunity.create(organization_id: 4, title: 'Sailor Squad', content: 'Currently looking for volunteers. Must be agent of love and intellect!')
 
 

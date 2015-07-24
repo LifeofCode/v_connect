@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723144918) do
+ActiveRecord::Schema.define(version: 20150724191215) do
 
   create_table "favourites", force: :cascade do |t|
     t.integer  "organization_id"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20150723144918) do
   add_index "favourites", ["organization_id"], name: "index_favourites_on_organization_id"
   add_index "favourites", ["student_id"], name: "index_favourites_on_student_id"
 
+  create_table "opportunities", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.string   "title"
+    t.string   "content"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "opportunities", ["organization_id"], name: "index_opportunities_on_organization_id"
+
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -31,16 +41,6 @@ ActiveRecord::Schema.define(version: 20150723144918) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
   end
-
-  create_table "posts", force: :cascade do |t|
-    t.integer  "organization_id"
-    t.string   "title"
-    t.string   "content"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "posts", ["organization_id"], name: "index_posts_on_organization_id"
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
