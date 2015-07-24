@@ -21,6 +21,7 @@ helpers do
 
   # redirect to profile page if user is logged in
   def logged_in!
+    @student = nil
     return if ! (current_org? || current_student?)
     redirect "/#{session[:type]}s/profile"
   end
@@ -29,7 +30,14 @@ helpers do
   def login_user(id, type)
     session[:id] = id
     session[:type] = type
+    # TODO: find a better way to save session user info (for nav bar)
+    session[:name] = current_student.first_name if current_student?
+    session[:name] = current_org.name if current_org?
     redirect "/#{type}s/profile"
+  end
+
+  def session_name
+    session[:name]
   end
 
   # redirect to home when a student is not logged in
@@ -58,3 +66,4 @@ get '/logout' do
   session[:type] = nil
   redirect '/'
 end
+

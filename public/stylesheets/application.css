@@ -23,3 +23,14 @@
 .vertical-space-format {
   text-size:4px;
 }
+
+.form-login {
+  margin: auto;
+  width: 30em;
+}
+
+.entire-login-page {
+  text-align: center;
+  margin-top: 15em;
+}
+

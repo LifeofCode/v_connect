@@ -21,6 +21,8 @@ end
 
 get '/students/profile' do
   auth_student!
+  @organizations = current_student.organizations
+  @student_favs = @organizations.map {|organization| organization.id}
   erb :'/students/show'
 end
 
@@ -33,7 +35,9 @@ end
 #a student can see their favourite organizations
 get '/students/:id/organizations' do
   auth_student!
-  @organizations = @student.organizations
+  @organizations = current_student.organizations
+  @student_favs = []
+  @student_favs = @organizations.map {|organization| organization.id}
   erb :'organizations/index'
 end
 
@@ -42,6 +46,7 @@ post '/students' do
   @student = Student.new(params[:student])
   @student.password = params[:password]
   @student.password_confirmation = params[:password2]
+
   if @student.save
     login_user(@student.id, 'student')
   else
@@ -57,7 +62,26 @@ post '/students/session' do
     login_user(@student.id, 'student')
   else
     @errors << "Invalid login"
+    # @student = nil
     erb :'students/login'
+  end
+end
+
+post '/favourite' do 
+  @fav_found = Favourite.exists?(student_id: session[:id], organization_id: params[:organization_id])
+  @student_favs = []
+  @organizations = Organization.all
+  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student?
+
+  if @fav_found
+    @errors << "You've already favoured this organization, you can see it on your profile :)"
+    erb :'/organizations/index'  
+  else
+    Favourite.create(
+      student_id: session[:id],
+      organization_id: params[:organization_id]
+    )
+    redirect '/organizations'
   end
 end
 
@@ -65,9 +89,12 @@ end
 put '/students' do
   auth_student!
   if @student.update(params[:student])
-     redirect '/students/profile'
+    session[:name] = @student.first_name
+    redirect '/students/profile'
   else
     @errors = @student.errors.full_messages
+    # @student = nil
     erb :'students/edit'
   end
 end
+

@@ -1,6 +1,8 @@
 #students can see a list of all organizations that are registered
 get '/organizations' do 
   #TODO: change when sessions/login/authorization is finished
+  @student_favs = []
+  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student
   @organizations = Organization.all
   erb :'organizations/index'
 end
@@ -16,11 +18,12 @@ end
 get '/organizations/session' do
   logged_in!
   @organization = Organization.new
-  erb :'organizations/login' #TODO: combine this with the student login
+  erb :'organizations/login'
 end
 
 get '/organizations/profile' do
   auth_org!
+  @students = @organization.students
   erb :'/organizations/show'
 end
 
@@ -66,6 +69,7 @@ put '/organizations' do
   auth_org!
   # TODO: clearing the name will also clear the name in the nav bar
   if @organization.update(params[:org])
+    session[:name] = @organization.name
     redirect '/organizations/profile'
   else    
     @errors = @organization.errors.full_messages
