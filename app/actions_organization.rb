@@ -63,3 +63,7 @@ post '/organizations/session' do
     erb :'organizations/login'
   end
 end
+
+get '/organizations/posts' do
+  erb :'/posts/show'
+end

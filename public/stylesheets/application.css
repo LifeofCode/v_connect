@@ -13,6 +13,14 @@
   background-color: #F8F8F8;
   margin-right: 10px;
   border-radius: 5px;
+  height: 10em;
+}
+
+.profile-link {
+  background-color: #F8F8F8;
+  margin-right: 10px;
+  border-radius: 5px;
+  height: 7em;
 }
 
 .format {
