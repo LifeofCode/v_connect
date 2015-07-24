@@ -25,7 +25,6 @@ helpers do
   end
 
   # redirect to home when a student is not logged in
-  # save current_student to @student otherwise
   def auth_student!
     return if current_student?
     redirect '/'
@@ -38,8 +37,9 @@ helpers do
 
 end
 
+# save logged in student to @student and logged in org to @organization
+# TODO: before every route seems excessive, but layoue.erb requires this info for displaying the correct nav bar
 before do
-  # TODO: before every route seems excessive
   @errors =[]
   @student = Student.find(session[:id]) if current_student?
   @organization = Organization.find(session[:id]) if current_org?
