@@ -7,7 +7,9 @@
   <% if current_student %>
     <form method="post" action="/favourite">
       <% if @student_favs.include?(organization.id) %>
-        <input  class="btn btn-danger" type="submit" value="Favourited"  disabled title="Click to de-favourite this organization">
+      <input name="_method" type="hidden" value="delete" />
+        <input  class="btn btn-danger" type="submit" value="Favourited" title="Click to de-favourite this organization">
+        <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
       <% else %>
         <input  class="btn btn-success" type="submit" value="Favourite">
         <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
