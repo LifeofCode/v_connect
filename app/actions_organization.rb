@@ -1,6 +1,8 @@
 #students can see a list of all organizations that are registered
 get '/organizations' do 
   #TODO: change when sessions/login/authorization is finished
+  @student_favs = []
+  @student_favs = current_student.organizations.map {|organization| organization.id}
   @errors = []
   @organizations = Organization.all
   erb :'organizations/index'

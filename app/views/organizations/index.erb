@@ -6,17 +6,20 @@
   <h1> All Organizations</h1>
 <% end %> 
 
-
 <% @organizations.each do |organization| %>
   <div> 
     <a href="/organizations/<%= organization.id %>" > <%= organization.name %> </a>
     <h5> Email: <%= organization.email %></h5> 
     <h5> Phone Number: <%= organization.phone_number %> </h5>
-    Test: <%= organization.favourites.count%>
-  </div>
+  </div>  
   <form method="post" action="/favourite">
-    <input  class="btn btn-success" type="submit" value="Favourite">
-    <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
+    <% if @student_favs.include?(organization.id) %>
+      <input  class="btn btn-danger" type="submit" value="Favourited" title="Click to de-favourite this organization" disabled>
+    <% else %>
+      <input  class="btn btn-success" type="submit" value="Favourite">
+      <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
+    <% end %>
   </form>
 <% end %>
 
+  
