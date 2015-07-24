@@ -73,6 +73,19 @@ post '/students/session' do
   end
 end
 
+# update student info
+put '/students' do
+  auth_student!
+  if @student.update(params[:student])
+    session[:name] = @student.first_name
+    redirect '/students/profile'
+  else
+    @errors = @student.errors.full_messages
+    # @student = nil
+    erb :'students/edit'
+  end
+end
+
 post '/favourite' do 
   @fav_found = Favourite.exists?(student_id: session[:id], organization_id: params[:organization_id])
   @student_favs = []
@@ -101,17 +114,3 @@ delete '/favourite' do
   redirect '/organizations'
   # TODO: redirect to student profile
 end
-
-# update student info
-put '/students' do
-  auth_student!
-  if @student.update(params[:student])
-    session[:name] = @student.first_name
-    redirect '/students/profile'
-  else
-    @errors = @student.errors.full_messages
-    # @student = nil
-    erb :'students/edit'
-  end
-end
-

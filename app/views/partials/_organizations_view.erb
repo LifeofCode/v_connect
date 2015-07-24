@@ -4,7 +4,7 @@
     <h5> Email: <%= organization.email %></h5> 
     <h5> Phone Number: <%= organization.phone_number %> </h5>
   </div>  
-  <% if current_student %>
+  <% if current_student? %>
     <form method="post" action="/favourite">
       <% if @student_favs.include?(organization.id) %>
       <input name="_method" type="hidden" value="delete" />
