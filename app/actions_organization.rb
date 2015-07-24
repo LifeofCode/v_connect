@@ -78,6 +78,26 @@ put '/organizations' do
 end 
 
 # show posts by organization
-get '/organizations/posts' do
+get '/organizations/opportunities' do
+  @organization = current_org
   erb :'/opportunities/show'
+end
+
+
+get '/organizations/opportunities/new' do
+  erb :'/opportunities/new'
+end
+
+post '/organizations/opportunities/new' do
+    @opportunity = Opportunity.new
+    @opportunity.title = params[:title]
+    @opportunity.content = params[:content]
+    @opportunity.organization_id = current_org.id
+
+  if @opportunity.save
+    redirect '/organizations/opportunities'
+  else
+    @errors = @opportunity.errors.full_messages 
+    erb :'opportunities/new'
+  end
 end
