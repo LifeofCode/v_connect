@@ -61,6 +61,7 @@ post '/students/session' do
   end
 end
 
+# update student info
 put '/students' do
   auth_student!
   if @student.update(params[:student])

@@ -1,7 +1,15 @@
 # Homepage (Root path)
 
-# TODO: authorize logged in student
 helpers do
+
+  # check for current user
+  def current_student
+    @student ||= Student.find(session[:id])
+  end
+
+  def current_org
+    @organization ||= Organization.find(session[:id])
+  end
 
   def current_student?
     session[:id] && session[:type] == 'student'
@@ -26,23 +34,19 @@ helpers do
 
   # redirect to home when a student is not logged in
   def auth_student!
-    return if current_student?
+    return current_student if current_student?
     redirect '/'
   end
 
   def auth_org!
-    return if current_org?
+    return current_org if current_org?
     redirect '/'
   end
 
 end
 
-# save logged in student to @student and logged in org to @organization
-# TODO: before every route seems excessive, but layoue.erb requires this info for displaying the correct nav bar
 before do
   @errors =[]
-  @student = Student.find(session[:id]) if current_student?
-  @organization = Organization.find(session[:id]) if current_org?
 end
 
 get '/' do

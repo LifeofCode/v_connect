@@ -61,11 +61,13 @@ post '/organizations/session' do
   end
 end
 
+# edit organization profile
 put '/organizations' do
   auth_org!
+  # TODO: clearing the name will also clear the name in the nav bar
   if @organization.update(params[:org])
     redirect '/organizations/profile'
-  else
+  else    
     @errors = @organization.errors.full_messages
     erb :'organizations/edit'
   end
