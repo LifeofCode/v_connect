@@ -48,7 +48,7 @@ post '/organizations' do
   @organization.password_confirmation = params[:password2]
   if @organization.save
     session[:org_id] = @organization.id
-    redirect '/organization/profile'
+    redirect '/organizations/profile'
   else
     @errors = @organization.errors.full_messages 
     erb :'organizations/new'
