@@ -18,6 +18,8 @@ end
 get '/students/session' do
   if current_student?
     redirect '/students/profile'
+  elsif current_org?
+    redirect '/organizations/profile'
   else
     @student = nil
     erb :'students/login'
@@ -27,6 +29,8 @@ end
 get '/students/profile' do
   if current_student?
     erb :'/students/show'
+  elsif current_org?
+    redirect '/organizations/profile'
   else 
     redirect '/'
   end

@@ -17,6 +17,19 @@ helpers do
   def current_org?
     session[:org_id]
   end
+
+  def auth_student!
+    return if current_student?
+    headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+    halt 401, "Not authorized\n"
+  end
+
+  def auth_org!
+    return if current_org?
+    headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+    halt 401, "Not authorized\n"
+  end
+
 end
 
 before '/*' do

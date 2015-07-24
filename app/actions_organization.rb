@@ -7,21 +7,43 @@ end
 
 # organization sign up page
 get '/organizations/register' do
-  @organization = Organization.new
-  erb :'organizations/new'
+  if current_student?
+    redirect '/students/profile'
+  elsif current_org?
+    redirect '/organizations/profile'
+  else
+    @organization = Organization.new
+    erb :'organizations/new'
+  end
 end
 
 # organization login page
 get '/organizations/session' do
-  @organization = Organization.new
-  erb :'organizations/login' #TODO: combine this with the student login
+  if current_student?
+    redirect '/students/profile'
+  elsif current_org?
+    redirect '/organizations/profile'
+  else
+    @organization = Organization.new
+    erb :'organizations/login' #TODO: combine this with the student login
+  end
 end
 
 get '/organizations/profile' do
-  @organization = Organization.find(session[:org_id])
-  if @organization
+  if current_org?
     erb :'/organizations/show'
+  elsif 
+    current_student?
+    redirect '/students/profile'
   else 
+    redirect '/'
+  end
+end
+
+get '/organizations/edit' do
+  if current_org?
+    erb :'/organizations/edit'
+  else
     redirect '/'
   end
 end
@@ -57,5 +79,21 @@ post '/organizations/session' do
   else
     @errors << "Invalid login"
     erb :'organizations/login'
+  end
+end
+
+put '/organizations' do
+  # TODO: only ask for password if there has been an update
+  @organization = current_org
+  if @organization.authenticate(params[:password])
+    if @organization.update(params[:org])
+      redirect '/organizations/profile'
+    else
+      @errors = @organization.errors.full_messages
+      erb :'organizations/edit'
+    end
+  else
+    @errors << 'please enter your password' 
+    erb :'organizations/edit'
   end
 end
