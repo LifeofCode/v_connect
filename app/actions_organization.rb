@@ -54,7 +54,7 @@ end
 post '/organizations/session' do
   @org = Organization.find_by(email: params[:email])
   if @org && @org.authenticate(params[:password])
-    login_user(@organization.id, 'organization')
+    login_user(@org.id, 'organization')
   else
     @errors << "Invalid login"
     erb :'organizations/login'

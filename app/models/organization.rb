@@ -6,6 +6,7 @@ class Organization < ActiveRecord::Base
   has_many :posts
 	has_many :students, through: :favourites
 
-  validates :email, uniqueness: true
+  validates :name, presence: true
+  validates :email, format: {with: /\w+\.?\w+@\w+\.\w+/, message: "invalid"}, uniqueness: true
 
 end

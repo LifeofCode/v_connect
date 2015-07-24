@@ -27,21 +27,22 @@ helpers do
   # redirect to home when a student is not logged in
   # save current_student to @student otherwise
   def auth_student!
-    @student = Student.find(session[:id])
     return if current_student?
     redirect '/'
   end
 
   def auth_org!
-    @organization = Organization.find(session[:id])
     return if current_org?
     redirect '/'
   end
 
 end
 
-before '/*' do
+before do
+  # TODO: before every route seems excessive
   @errors =[]
+  @student = Student.find(session[:id]) if current_student?
+  @organization = Organization.find(session[:id]) if current_org?
 end
 
 get '/' do
