@@ -5,8 +5,8 @@
     <div class = "profile-box">
       <div class = "format">
         <h3> About me </h3>
-        <h4> email: </h4> <%= current_student.email%>
-        <h4> phone number: </h4> <%= current_student.phone_number%>
+        <h4> Email: </h4> <%= current_student.email%>
+        <h4> Phone Number: </h4> <%= current_student.phone_number%>
       </div>
     </div>
   </div>
@@ -16,6 +16,7 @@
       <div class = "format">
         <div class = "vertical-space-format">
           <h3> Favourite organizations </h3>
+          <%= erb :'partials/_organizations_view' %>
         </div>
       </div>
     </div>
@@ -23,3 +24,4 @@
 
   </div>
 </div>
+

@@ -1,0 +1,7 @@
+<% @students.each do |student| %>
+  <div> 
+    <a href="/students/<%= student.id %>" > <%= student.first_name + ' ' + student.last_name %> </a>
+    <h5> Email: <%= student.email %></h5> 
+    <h5> Phone Number: <%= student.phone_number %> </h5>
+  </div>
+<% end %>

@@ -1,6 +1,9 @@
 #students can see a list of all organizations that are registered
 get '/organizations' do 
   #TODO: change when sessions/login/authorization is finished
+  @student_favs = []
+  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student
+  @errors = []
   @organizations = Organization.all
   erb :'organizations/index'
 end
@@ -21,6 +24,7 @@ end
 
 get '/organizations/profile' do
   @organization = Organization.find(session[:org_id])
+  @students = @organization.students
   if @organization
     erb :'/organizations/show'
   else 
@@ -31,6 +35,7 @@ end
 #an organization can see a list of interested students
 get '/organizations/:id/students' do
   #TODO: refactor erb file using partials
+  @errors = []
   @organization = Organization.find(params[:id])
   @students = @organization.students
   erb :'students/index'

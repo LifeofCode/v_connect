@@ -14,6 +14,9 @@ helpers do
   def current_org?
     session[:org_id]
   end
+  def student_id
+    session[:id]
+  end
 end
 
 get '/' do
@@ -25,3 +28,4 @@ get '/logout' do
   session[:org_id] = nil
   redirect '/'
 end
+
