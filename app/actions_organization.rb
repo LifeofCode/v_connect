@@ -75,6 +75,7 @@ put '/organizations' do
     @errors = @organization.errors.full_messages
     erb :'organizations/edit'
   end
+end 
 
 # show posts by organization
 get '/organizations/posts' do
