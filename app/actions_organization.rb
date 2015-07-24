@@ -10,7 +10,7 @@ end
 # student can search for organization by name
 get '/organizations/search' do
   @student_favs = []
-  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student
+  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student?
   @organizations = Organization.where("lower(name) LIKE ?", "%#{params[:keyword].downcase}%")
   erb :'organizations/index'
 end
