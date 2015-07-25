@@ -40,7 +40,7 @@ helpers do
     session[:name]
   end
 
-  # redirect to home when a student is not logged in
+  # redirect to login page
   def auth_student!
     return current_student if current_student?
     redirect '/students/session'

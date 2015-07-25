@@ -2,6 +2,7 @@ class Student < ActiveRecord::Base
 	
 	has_many :favourites
 	has_many :organizations, through: :favourites
+  has_many :opportunities, through: :organizations
 
   has_secure_password
 

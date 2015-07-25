@@ -1,5 +1,10 @@
-<% if current_org? %>
-  <a href = '/organizations/opportunities/new'><h3> Add a new opportunity </h3></a>
-<% end %>
-
-<%= erb :'partials/_opportunities' %>
+<div> 
+  <h1> <%= @organization.name %> </h1>
+  <p> Email: <%= @organization.email %> | Phone: <%= @organization.email %></p>  
+</div>
+<div> 
+  <h3> Opportunity Title: </h3>
+  <h5> <%= @opportunity.title %> </h5>
+  <h3> The Specifics: </h3>
+  <h5> <%= @opportunity.content %> <h5> 
+</div>

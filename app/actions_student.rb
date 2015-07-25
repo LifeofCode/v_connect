@@ -1,5 +1,5 @@
 #display all students that are registered
-get '/students' do 
+get '/students' do
   @students = Student.all
   erb :'students/index'
 end
@@ -32,7 +32,9 @@ end
 
 get '/students/profile' do
   auth_student!
+  @student = current_student
   @organizations = current_student.organizations
+  @opportunities = current_student.opportunities
   erb :'/students/show'
 end
 
@@ -52,10 +54,16 @@ get '/students/organizations' do
   erb :'organizations/index'
 end
 
+get '/students/opportunities' do
+  auth_student!
+  @opportunities = current_student.opportunities
+  erb :'/opportunities/index'
+end
+
 # Display a student's public profile
 get '/students/:id' do 
   @student = Student.find(params[:id])
-  erb :'students/public'
+  erb :'students/show'
 end
 
 # create new student
@@ -105,9 +113,9 @@ post '/favourite' do
   if @new_fav.save
     redirect '/organizations'
   else
-    @errors = @new_fav.errors.full_messages
+    @errors = @new_fav.errors.messages[:student]
   # TODO: dry this out
-    check_favourites
+    check_favourite
     @organizations = Organization.all
     erb :'organizations/index'
   end
@@ -119,6 +127,9 @@ delete '/favourite' do
     student_id: session[:id], 
     organization_id: params[:organization_id]
   )
-  @favourite.destroy if @favourite
-  redirect "#{params[:redirect]}"
+  # TODO: prevent redirect to blank page when 
+  if @favourite
+    @favourite.destroy 
+    redirect "#{params[:redirect]}"
+  end
 end

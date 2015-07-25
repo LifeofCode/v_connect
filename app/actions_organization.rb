@@ -1,6 +1,5 @@
 #students can see a list of all organizations that are registered
 get '/organizations' do 
-  #TODO: change when sessions/login/authorization is finished
   auth_student!
   check_favourites
   @organizations = Organization.all
@@ -33,11 +32,11 @@ get '/organizations/session' do
   erb :'organizations/login'
 end
 
-
 get '/organizations/profile' do
   auth_org!
   @organization = current_org
-  @students = @organization.students
+  @students = current_org.students
+  @opportunities = current_org.opportunities
   erb :'/organizations/show'
 end
 
@@ -46,18 +45,22 @@ get '/organizations/edit' do
   erb :'/organizations/edit'
 end
 
-# show posts by organization
+# list opportunities by organization
 get '/organizations/opportunities' do
+  auth_org!
   @organization = current_org
-  erb :'/opportunities/show'
+  @opportunities = current_org.opportunities
+  erb :'/opportunities/index'
 end
 
 get '/organizations/opportunities/new' do
+  auth_org!
   erb :'/opportunities/new'
 end
 
-get '/organizations/:id' do 
+get '/organizations/:id' do
   @organization = Organization.find(params[:id])
+  @opportunities = @organization.opportunities
   erb :'organizations/show'
 end
 
@@ -97,11 +100,18 @@ put '/organizations' do
   end
 end 
 
+get '/organizations/opportunities/:id' do 
+  @opportunity = Opportunity.find(params[:id])
+  @organization = @opportunity.organization
+  erb :'opportunities/show'
+end
+
 post '/organizations/opportunities/new' do
     @opportunity = Opportunity.new
     @opportunity.title = params[:title]
     @opportunity.content = params[:content]
     @opportunity.organization_id = current_org.id
+    @organization = current_org
 
   if @opportunity.save
     redirect '/organizations/opportunities'
