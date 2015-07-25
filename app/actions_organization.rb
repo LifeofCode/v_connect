@@ -41,6 +41,17 @@ get '/organizations/edit' do
   auth_org!
   erb :'/organizations/edit'
 end
+
+# show posts by organization
+get '/organizations/opportunities' do
+  @organization = current_org
+  erb :'/opportunities/show'
+end
+
+get '/organizations/opportunities/new' do
+  erb :'/opportunities/new'
+end
+
 get '/organizations/:id' do 
   @organization = Organization.find(params[:id])
   erb :'organizations/show'
@@ -90,17 +101,6 @@ put '/organizations' do
     erb :'organizations/edit'
   end
 end 
-
-# show posts by organization
-get '/organizations/opportunities' do
-  @organization = current_org
-  erb :'/opportunities/show'
-end
-
-
-get '/organizations/opportunities/new' do
-  erb :'/opportunities/new'
-end
 
 post '/organizations/opportunities/new' do
     @opportunity = Opportunity.new
