@@ -1,5 +1,5 @@
 #display all students that are registered
-get '/students' do 
+get '/students' do
   @students = Student.all
   erb :'students/index'
 end
