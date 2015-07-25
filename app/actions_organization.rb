@@ -47,12 +47,14 @@ end
 
 # list opportunities by organization
 get '/organizations/opportunities' do
+  auth_org!
   @organization = current_org
-  # should be /opportunities/index
-  erb :'/opportunities/show'
+  @opportunities = current_org.opportunities
+  erb :'/opportunities/index'
 end
 
 get '/organizations/opportunities/new' do
+  auth_org!
   erb :'/opportunities/new'
 end
 

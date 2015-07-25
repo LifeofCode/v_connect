@@ -2,4 +2,6 @@
   <a href = '/organizations/opportunities/new'><h3> Add a new opportunity </h3></a>
 <% end %>
 
-<%= erb :'partials/_opportunities' %>
+<% @opportunities.each do |opportunity| %>
+  <%= erb :'partials/_opportunities', locals: { opportunity: opportunity } %>
+<% end %>

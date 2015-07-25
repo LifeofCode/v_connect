@@ -53,10 +53,10 @@ get '/students/organizations' do
   erb :'organizations/index'
 end
 
-get '/students/organizations/opportunities' do
+get '/students/opportunities' do
   auth_student!
   @opportunities = current_student.opportunities
-  erb :'/opportunities/show'
+  erb :'/opportunities/index'
 end
 
 # Display a student's public profile
