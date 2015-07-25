@@ -41,9 +41,14 @@ get '/organizations/edit' do
   auth_org!
   erb :'/organizations/edit'
 end
-get '/organizations/:id' do 
-  @organization = Organization.find(params[:id])
-  erb :'organizations/show'
+# show posts by organization
+get '/organizations/opportunities' do
+  @organization = current_org
+  erb :'/opportunities/show'
+end
+
+get '/organizations/opportunities/new' do
+  erb :'/opportunities/new'
 end
 
 #an organization can see a list of interested students
@@ -52,6 +57,11 @@ get '/organizations/:id/students' do
   auth_org!
   @students = @organization.students
   erb :'students/index'
+end
+
+get '/organizations/:id' do 
+  @organization = Organization.find(params[:id])
+  erb :'organizations/show'
 end
 
 # create new organization
@@ -91,16 +101,6 @@ put '/organizations' do
   end
 end 
 
-# show posts by organization
-get '/organizations/opportunities' do
-  @organization = current_org
-  erb :'/opportunities/show'
-end
-
-
-get '/organizations/opportunities/new' do
-  erb :'/opportunities/new'
-end
 
 post '/organizations/opportunities/new' do
     @opportunity = Opportunity.new
