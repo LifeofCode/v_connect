@@ -3,5 +3,9 @@
   
    <h3><%= opportunity[:title] %> </h3>
    <p><%= opportunity[:content] %></p>
+   <a href='/organizations/opportunities/<%=opportunity.id%>'> Edit opportunity </a>
+   <a href='/organizations/opportunities/<%=opportunity.id%>/delete'> Delete opportunity </a>
+
+
 
 <% end %>

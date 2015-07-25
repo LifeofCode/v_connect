@@ -110,3 +110,28 @@ post '/organizations/opportunities/new' do
     erb :'opportunities/new'
   end
 end
+
+get '/organizations/opportunities/:id' do
+    @opportunity = Opportunity.find_by(id: params[:id])
+    erb :'opportunities/edit'
+end
+
+post '/organizations/opportunities/:id/edit' do
+    @opportunity = Opportunity.find_by(id: params[:id])
+    @opportunity.title = params[:title]
+    @opportunity.content = params[:content]
+    @opportunity.organization_id = current_org.id
+
+  if @opportunity.save
+    redirect '/organizations/opportunities'
+  else
+    @errors = @opportunity.errors.full_messages 
+    erb :'opportunities/edit'
+  end
+end
+
+get '/organizations/opportunities/:id/delete' do
+  @opportunity = Opportunity.find_by(id: params[:id])
+  @opportunity.delete
+  redirect '/organizations/opportunities'
+end

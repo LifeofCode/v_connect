@@ -1,5 +1,7 @@
 <div> 
   <a href="/organizations/<%= organization.id %>" > <%= organization.name %> </a>
   <h5> Email: <%= organization.email %></h5> 
-  <h5> Phone Number: <%= organization.phone_number %> </h5>
+  <% if organization.phone_number %>
+    <h5> Phone Number: <%= organization.phone_number %> </h5>
+  <% end %>
 </div>  

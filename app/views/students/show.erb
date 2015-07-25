@@ -8,7 +8,9 @@
       <div class = "format">
         <h3> About me </h3>
         <h4> Email: </h4> <%= current_student.email%>
-        <h4> Phone Number: </h4> <%= current_student.phone_number%>
+        <%if current_student.phone_number%>
+          <h4> Phone Number: </h4> <%= current_student.phone_number%>
+        <%end%>
       </div>
     </div>
   </div>
