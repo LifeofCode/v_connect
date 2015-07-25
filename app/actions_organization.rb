@@ -10,7 +10,12 @@ end
 # student can search for organization by name
 get '/organizations/search' do
   check_favourites
+  redirect '/organizations' if params[:keyword].empty?
   @organizations = Organization.where("lower(name) LIKE ?", "%#{params[:keyword].downcase}%")
+  if @organizations.empty?
+    @errors << "Cannot find organization with #{params[:keyword]}"
+    @organizations = Organization.all
+  end
   erb :'organizations/index'
 end
 
@@ -64,11 +69,6 @@ get '/organizations/:id/students' do
   erb :'students/index'
 end
 
-get '/organizations/:id' do 
-  @organization = Organization.find(params[:id])
-  erb :'organizations/show'
-end
-
 # create new organization
 post '/organizations' do
   @organization = Organization.new(params[:org])
@@ -96,7 +96,6 @@ end
 # edit organization profile
 put '/organizations' do
   auth_org!
-  # TODO: clearing the name will also clear the name in the nav bar
   if @organization.update(params[:org])
     session[:name] = @organization.name
     redirect '/organizations/profile'

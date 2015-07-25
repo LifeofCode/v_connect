@@ -6,7 +6,12 @@ end
 
 # organization can search for student by first and last names
 get '/students/search' do
+  redirect '/students' if params[:keyword].empty?
   @students = Student.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{params[:keyword].downcase}%", "%#{params[:keyword].downcase}%")
+  if @students.empty?
+    @errors << "Cannot find student with #{params[:keyword]}"
+    @students = Student.all
+  end
   erb :'students/index'
 end
 
