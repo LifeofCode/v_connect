@@ -12,8 +12,7 @@
       <% if @student_favs.include?(organization.id) %>
         <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
       <% else %>
-        <input  class="btn btn-success" type="submit" value="Favourite">
-        <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
+        <%= erb :'partials/_favourite_button', locals: { organization: organization } %>        
       <% end %>
     
     </form>

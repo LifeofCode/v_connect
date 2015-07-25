@@ -17,16 +17,20 @@
     <div class = "profile-box">
       <div class = "format">
         <div class = "vertical-space-format">
-        
-          <h3> Favourite Organizations </h3>
-            <% @organizations.each do |organization| %>
+        <% if @organizations.any? %>
+        <h3> Favourite Organizations </h3>
+          <% @organizations.each do |organization| %>
+            <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
+            <form method="post" action="/favourite">
+              <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
+            </form>
+          <% end %>
+        <% else %>
+          <h3>You haven't favourited any organizations yet. 
+          <br>
+          <a href="/organizations">Browse Organizations</a></h3>
+        <% end %>
 
-              <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
-              <form method="post" action="/favourite">
-                <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
-              </form>
-
-            <% end %>
         </div>
       </div>
     </div>
