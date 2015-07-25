@@ -33,6 +33,7 @@ end
 get '/students/profile' do
   auth_student!
   @organizations = current_student.organizations
+  @opportunities = current_student.opportunities
   erb :'/students/show'
 end
 
@@ -50,6 +51,12 @@ get '/students/organizations' do
   check_favourites
   @organizations = current_student.organizations
   erb :'organizations/index'
+end
+
+get '/students/organizations/opportunities' do
+  auth_student!
+  @opportunities = current_student.opportunities
+  erb :'/opportunities/show'
 end
 
 # Display a student's public profile

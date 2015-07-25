@@ -1,6 +1,5 @@
 #students can see a list of all organizations that are registered
 get '/organizations' do 
-  #TODO: change when sessions/login/authorization is finished
   auth_student!
   check_favourites
   @organizations = Organization.all
@@ -33,11 +32,11 @@ get '/organizations/session' do
   erb :'organizations/login'
 end
 
-
 get '/organizations/profile' do
   auth_org!
   @organization = current_org
-  @students = @organization.students
+  @students = current_org.students
+  @opportunities = current_org.opportunities
   erb :'/organizations/show'
 end
 
@@ -46,9 +45,10 @@ get '/organizations/edit' do
   erb :'/organizations/edit'
 end
 
-# show posts by organization
+# list opportunities by organization
 get '/organizations/opportunities' do
   @organization = current_org
+  # should be /opportunities/index
   erb :'/opportunities/show'
 end
 
@@ -56,8 +56,9 @@ get '/organizations/opportunities/new' do
   erb :'/opportunities/new'
 end
 
-get '/organizations/:id' do 
+get '/organizations/:id' do
   @organization = Organization.find(params[:id])
+  @opportunities = @organization.opportunities
   erb :'organizations/show'
 end
 
