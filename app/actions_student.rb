@@ -27,6 +27,7 @@ end
 
 get '/students/profile' do
   auth_student!
+  @student = current_student
   @organizations = current_student.organizations
   @student_favs = @organizations.map {|organization| organization.id}
   erb :'/students/show'
@@ -45,6 +46,11 @@ get '/students/organizations' do
   @student_favs = []
   @student_favs = @organizations.map {|organization| organization.id}
   erb :'organizations/index'
+end
+
+get '/students/:id' do 
+  @student = Student.find(params[:id])
+  erb :'students/show'
 end
 
 # create new student

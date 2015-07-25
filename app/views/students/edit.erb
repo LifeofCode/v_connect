@@ -14,8 +14,13 @@
   <label>Email</label>
     <input type="email" name="student[email]" class="form-control" value='<%= @student.email %>'>
   </div>
+  <div> 
   <label>Phone Number</label>
     <input type="text" name="student[phone_number]" class="form-control" value='<%= @student.phone_number %>'>
+  </div>
+  <div> 
+  <label>About Me</label>
+    <input type="text" name="student[about]" class="form-control" value='<%= @student.about %>'>
   </div>
   <button type="submit" class="btn btn-default">Update</button>
 </form>
