@@ -40,15 +40,19 @@ helpers do
     session[:name]
   end
 
-  # redirect to home when a student is not logged in
+  # redirect to login page
   def auth_student!
     return current_student if current_student?
-    redirect '/'
+    redirect '/students/session'
   end
 
   def auth_org!
     return current_org if current_org?
-    redirect '/'
+    redirect '/organizations/session'
+  end
+
+  def check_favourites
+    @student_favs = Favourite.where(student_id: current_student.id).pluck(:organization_id)
   end
 
 end
@@ -58,6 +62,7 @@ before do
 end
 
 get '/' do
+  logged_in!
   erb :index
 end
 
