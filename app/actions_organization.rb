@@ -2,7 +2,7 @@
 get '/organizations' do 
   #TODO: change when sessions/login/authorization is finished
   @student_favs = []
-  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student?
+  @student_favs = Favourite.where(student_id: current_student.id).pluck(:organization_id)
   @organizations = Organization.all
   erb :'organizations/index'
 end
@@ -29,8 +29,10 @@ get '/organizations/session' do
   erb :'organizations/login'
 end
 
+
 get '/organizations/profile' do
   auth_org!
+  @organization = current_org
   @students = @organization.students
   erb :'/organizations/show'
 end
@@ -40,12 +42,32 @@ get '/organizations/edit' do
   erb :'/organizations/edit'
 end
 
+# show posts by organization
+get '/organizations/opportunities' do
+  @organization = current_org
+  erb :'/opportunities/show'
+end
+
+get '/organizations/opportunities/new' do
+  erb :'/opportunities/new'
+end
+
+get '/organizations/:id' do 
+  @organization = Organization.find(params[:id])
+  erb :'organizations/show'
+end
+
 #an organization can see a list of interested students
 get '/organizations/:id/students' do
   #TODO: refactor erb file using partials
   auth_org!
   @students = @organization.students
   erb :'students/index'
+end
+
+get '/organizations/:id' do 
+  @organization = Organization.find(params[:id])
+  erb :'organizations/show'
 end
 
 # create new organization
@@ -84,17 +106,6 @@ put '/organizations' do
     erb :'organizations/edit'
   end
 end 
-
-# show posts by organization
-get '/organizations/opportunities' do
-  @organization = current_org
-  erb :'/opportunities/show'
-end
-
-
-get '/organizations/opportunities/new' do
-  erb :'/opportunities/new'
-end
 
 post '/organizations/opportunities/new' do
     @opportunity = Opportunity.new

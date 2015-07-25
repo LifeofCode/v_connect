@@ -3,29 +3,41 @@
 
   <div class="col-lg-6">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Seine_wide.jpg" alt="..." class="img-thumbnail">
-    <h1 class = "profile-name"> <%= current_org.name%> <small><a href='/organizations/edit'>edit profile</a></small></h1>
-    <a href = '/organizations/opportunities'> <div class = "btn btn-primary"> Add a post </div> </a>
-    
-        
+    <h1 class = "profile-name"> <%= @organization.name%> 
+      <small><a href='/organizations/edit'>Edit Profile</a></small>
+    </h1>
+    <a href = '/organizations/opportunities'> 
+    <div class = "btn btn-primary"> Add an Opportunity </div> </a>
     <div class = "profile-box">
       <div class = "format">
         <h3> Organization Info </h3>
-        <h4> Email: </h4> <%= current_org.email%>
-        <h4> Phone Number: </h4> <%= current_org.phone_number%>
+        <h4> Email: </h4> <%= @organization.email%>
+        <h4> Phone Number: </h4> <%= @organization.phone_number%>
       </div>
     </div>
   </div>
-
-
-  <div class = "col-lg-6">
-    <div class = "profile-box">
-      <div class = "format">
-        <div class = "vertical-space-format">
-          <h3> Interested Students</h3>
-          <%= erb :'partials/_students_view' %>
+  
+  <% if @students %>
+    <div class = "col-lg-6">
+      <div class = "profile-box">
+        <div class = "format">
+          <div class = "vertical-space-format">
+            <h3> Interested Students</h3>
+            <%= erb :'partials/_students' %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
+  <% else %>
+    <div class = "col-lg-6">
+      <div class = "profile-box">
+        <div class = "format">
+          <div class = "vertical-space-format">
+            <h3> Volunteer Opportunities</h3>
+            ---Show Opportunities Here ---
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

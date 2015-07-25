@@ -39,7 +39,7 @@ get '/students/edit' do
 end
 
 #a student can see their favourite organizations
-get '/students/:id/organizations' do
+get '/students/organizations' do
   auth_student!
   @organizations = current_student.organizations
   @student_favs = []
