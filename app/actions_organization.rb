@@ -45,6 +45,8 @@ get '/organizations/edit' do
   erb :'/organizations/edit'
 end
 
+
+
 # list opportunities by organization
 get '/organizations/opportunities' do
   auth_org!
@@ -53,16 +55,38 @@ get '/organizations/opportunities' do
   erb :'/opportunities/index'
 end
 
-get '/organizations/opportunities/new' do
-  auth_org!
-  erb :'/opportunities/new'
-end
-
 get '/organizations/:id' do
   @organization = Organization.find(params[:id])
   @opportunities = @organization.opportunities
   erb :'organizations/show'
 end
+
+
+get '/organizations/opportunities/new' do
+  auth_org!
+  erb :'/opportunities/new'
+end
+
+get '/organizations/opportunities/:id' do 
+  @opportunity = Opportunity.find(params[:id])
+  @organization = @opportunity.organization
+  erb :'opportunities/show'
+end
+
+get '/organizations/opportunities/:id/edit' do
+    @opportunity = Opportunity.find_by(id: params[:id])
+    erb :'opportunities/edit'
+end
+
+
+get '/organizations/opportunities/:id/delete' do
+  @opportunity = Opportunity.find_by(id: params[:id])
+  @opportunity.delete
+  redirect '/organizations/opportunities'
+end
+
+
+
 
 # create new organization
 post '/organizations' do
@@ -88,23 +112,7 @@ post '/organizations/session' do
   end
 end
 
-# edit organization profile
-put '/organizations' do
-  auth_org!
-  if @organization.update(params[:org])
-    session[:name] = @organization.name
-    redirect '/organizations/profile'
-  else    
-    @errors = @organization.errors.full_messages
-    erb :'organizations/edit'
-  end
-end 
 
-get '/organizations/opportunities/:id' do 
-  @opportunity = Opportunity.find(params[:id])
-  @organization = @opportunity.organization
-  erb :'opportunities/show'
-end
 
 post '/organizations/opportunities/new' do
     @opportunity = Opportunity.new
@@ -119,5 +127,34 @@ post '/organizations/opportunities/new' do
     @errors = @opportunity.errors.full_messages 
     erb :'opportunities/new'
   end
-
 end
+
+
+post '/organizations/opportunities/:id/edit' do
+    @opportunity = Opportunity.find_by(id: params[:id])
+    @opportunity.title = params[:title]
+    @opportunity.content = params[:content]
+    @opportunity.organization_id = current_org.id
+
+  if @opportunity.save
+    redirect '/organizations/opportunities'
+  else
+    @errors = @opportunity.errors.full_messages 
+    erb :'opportunities/edit'
+  end
+end
+
+# edit organization profile
+
+put '/organizations' do
+  auth_org!
+  if @organization.update(params[:org])
+    session[:name] = @organization.name
+    redirect '/organizations/profile'
+  else    
+    @errors = @organization.errors.full_messages
+    erb :'organizations/edit'
+  end
+end 
+
+

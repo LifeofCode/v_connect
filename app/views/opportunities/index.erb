@@ -8,7 +8,7 @@
     <% @opportunities.each do |opportunity| %>
       <%= erb :'partials/_opportunities', locals: { opportunity: opportunity } %>
       <% if !current_org? %>
-      Organization: <a href="/organizations/<%= opportunity.organization.id %>" ><%= opportunity.organization.name %></a>
+      Organization: <a href="/organizations/<%= opportunity.organization.id%>" ><%= opportunity.organization.name %></a>
       <% end %>
     <% end %>
 <% else %>
