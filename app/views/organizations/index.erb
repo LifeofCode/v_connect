@@ -1,7 +1,23 @@
 <%= erb :'partials/_errors' %>
 
-  <h1> Registered Organizations</h1>
+<h1> Registered Organizations</h1>  
 
-<%= erb :'partials/_organizations' %>
+<% @organizations.each do |organization| %>
+
+  <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
+
+  <% if current_student? %>
+    <form method="post" action="/favourite">
+      <% if @student_favs.include?(organization.id) %>
+      <input name="_method" type="hidden" value="delete" />
+        <input  class="btn btn-danger" type="submit" value="Favourited" title="Click to de-favourite this organization">
+        <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
+      <% else %>
+        <input  class="btn btn-success" type="submit" value="Favourite">
+        <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
+      <% end %>
+    </form>
+  <% end %>
+<% end %>
 
   
