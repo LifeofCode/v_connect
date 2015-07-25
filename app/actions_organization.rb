@@ -45,7 +45,7 @@ end
 # show posts by organization
 get '/organizations/opportunities' do
   @organization = current_org
-  erb :'/opportunities/show'
+  erb :'/opportunities/index'
 end
 
 get '/organizations/opportunities/new' do
@@ -107,11 +107,18 @@ put '/organizations' do
   end
 end 
 
+get '/organizations/opportunities/:id' do 
+  @opportunity = Opportunity.find(params[:id])
+  @organization = @opportunity.organization
+  erb :'opportunities/show'
+end
+
 post '/organizations/opportunities/new' do
     @opportunity = Opportunity.new
     @opportunity.title = params[:title]
     @opportunity.content = params[:content]
     @opportunity.organization_id = current_org.id
+    @organization = current_org
 
   if @opportunity.save
     redirect '/organizations/opportunities'
@@ -119,4 +126,5 @@ post '/organizations/opportunities/new' do
     @errors = @opportunity.errors.full_messages 
     erb :'opportunities/new'
   end
+
 end
