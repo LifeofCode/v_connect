@@ -3,11 +3,12 @@
 
   <div class="col-lg-6">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Seine_wide.jpg" alt="..." class="img-thumbnail">
-    <h1 class = "profile-name"> <%= @organization.name%> 
-      <small><a href='/organizations/edit'>Edit Profile</a></small>
-    </h1>
-    <a href = '/organizations/opportunities'> 
-    <div class = "btn btn-primary"> Add an Opportunity </div> </a>
+    <h1 class = "profile-name"> <%= @organization.name%> </h1>
+    <% if @students %>
+      <h1> <small><a href='/organizations/edit'>Edit Profile</a></small> </h1> 
+      <a href = '/organizations/opportunities'> 
+      <div class = "btn btn-primary"> Add an Opportunity </div> </a>
+    <% end %>
     <div class = "profile-box">
       <div class = "format">
         <h3> Organization Info </h3>
@@ -16,7 +17,7 @@
       </div>
     </div>
   </div>
-  
+
   <% if @students %>
     <div class = "col-lg-6">
       <div class = "profile-box">
@@ -34,7 +35,7 @@
         <div class = "format">
           <div class = "vertical-space-format">
             <h3> Volunteer Opportunities</h3>
-            ---Show Opportunities Here ---
+            <%= erb :'partials/_opportunities' %>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-<% opportunties = Opportunity.where(organization_id:current_org.id) %>
+<% opportunties = Opportunity.where(organization_id: current_org.id) %>
 <% opportunties.each do |opportunity| %>
   
    <h3><%= opportunity[:title] %> </h3>
