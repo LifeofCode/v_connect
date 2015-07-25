@@ -1,16 +1,15 @@
 #students can see a list of all organizations that are registered
 get '/organizations' do 
   #TODO: change when sessions/login/authorization is finished
-  @student_favs = []
-  @student_favs = Favourite.where(student_id: current_student.id).pluck(:organization_id)
+  auth_student!
+  check_favourites
   @organizations = Organization.all
   erb :'organizations/index'
 end
 
 # student can search for organization by name
 get '/organizations/search' do
-  @student_favs = []
-  @student_favs = Favourite.where(student_id: current_student.id).pluck(:organization_id)
+  check_favourites
   @organizations = Organization.where("lower(name) LIKE ?", "%#{params[:keyword].downcase}%")
   erb :'organizations/index'
 end

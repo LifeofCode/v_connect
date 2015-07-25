@@ -28,7 +28,6 @@ end
 get '/students/profile' do
   auth_student!
   @organizations = current_student.organizations
-  @student_favs = Favourite.where(student_id: current_student.id).pluck(:organization_id)
   erb :'/students/show'
 end
 
@@ -39,10 +38,12 @@ get '/students/edit' do
 end
 
 #a student can see their favourite organizations
+# TODO: is this neccessary? Since the info is already on the profile page
+# At the very least, split into a partial instead of using organiaztions/index.erb
 get '/students/organizations' do
   auth_student!
+  check_favourites
   @organizations = current_student.organizations
-  @student_favs = Favourite.where(student_id: current_student.id).pluck(:organization_id)
   erb :'organizations/index'
 end
 
@@ -90,11 +91,15 @@ post '/favourite' do
       student_id: session[:id],
       organization_id: params[:organization_id]
     )
-  
-  # TODO: using active record to display the error
-  @new_fav.save!
-  # @errors = @new_fav.errors if !@new_fav.save
-  redirect '/organizations'
+  if @new_fav.save
+    redirect '/organizations'
+  else
+    @errors = @new_fav.errors.full_messages
+  # TODO: dry this out
+    check_favourites
+    @organizations = Organization.all
+    erb :'organizations/index'
+  end
 end
 
 delete '/favourite' do
@@ -103,6 +108,6 @@ delete '/favourite' do
     student_id: session[:id], 
     organization_id: params[:organization_id]
   )
-  @favourite.destroy
-  redirect "/#{params[:redirect]}"
+  @favourite.destroy if @favourite
+  redirect "#{params[:redirect]}"
 end
