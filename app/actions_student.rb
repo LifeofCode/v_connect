@@ -28,7 +28,7 @@ end
 get '/students/profile' do
   auth_student!
   @organizations = current_student.organizations
-  @student_favs = @organizations.map {|organization| organization.id}
+  @student_favs = Favourite.where(student_id: current_student.id).pluck(:organization_id)
   erb :'/students/show'
 end
 
@@ -42,8 +42,7 @@ end
 get '/students/organizations' do
   auth_student!
   @organizations = current_student.organizations
-  @student_favs = []
-  @student_favs = @organizations.map {|organization| organization.id}
+  @student_favs = Favourite.where(student_id: current_student.id).pluck(:organization_id)
   erb :'organizations/index'
 end
 
@@ -87,21 +86,15 @@ put '/students' do
 end
 
 post '/favourite' do 
-  @fav_found = Favourite.exists?(student_id: session[:id], organization_id: params[:organization_id])
-  @student_favs = []
-  @organizations = Organization.all
-  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student?
-
-  if @fav_found
-    @errors << "You've already favoured this organization, you can see it on your profile :)"
-    erb :'/organizations/index'  
-  else
-    Favourite.create(
+  @new_fav = Favourite.new(
       student_id: session[:id],
       organization_id: params[:organization_id]
     )
-    redirect '/organizations'
-  end
+  
+  # TODO: using active record to display the error
+  @new_fav.save!
+  # @errors = @new_fav.errors if !@new_fav.save
+  redirect '/organizations'
 end
 
 delete '/favourite' do
@@ -111,6 +104,5 @@ delete '/favourite' do
     organization_id: params[:organization_id]
   )
   @favourite.destroy
-  redirect '/organizations'
-  # TODO: redirect to student profile
+  redirect "/#{params[:redirect]}"
 end
