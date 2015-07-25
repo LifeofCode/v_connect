@@ -9,12 +9,16 @@
 
     <div class = "profile-box">
       <div class = "format">
-        <h4> About me: </h4>
+        <% if current_student.about == ' ' %>
+          <h4> About me: </h4>
           <h5> <%= current_student.about %> </h5>
-        <h4> Email: </h4> 
+        <% end %>
+          <h4> Email: </h4> 
           <h5> <%= current_student.email%> </h5> 
-        <h4> Phone Number: </h4> 
+        <% if current_student.phone_number == ' ' %>
+          <h4> Phone Number: </h4> 
           <h5> <%= current_student.phone_number%> </h5>
+        <% end %>
       </div>
     </div>
   </div>
