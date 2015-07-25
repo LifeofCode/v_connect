@@ -1,5 +1,6 @@
 <h4><%= opportunity.title %></h4>
 <p><%= opportunity.content %></p>
-<a href='/organizations/opportunities/<%=opportunity.id%>'> Edit opportunity </a>
-<a href='/organizations/opportunities/<%=opportunity.id%>/delete'> Delete opportunity </a>
-
+<% if current_org? %>
+  <a href='/organizations/opportunities/<%=opportunity.id%>/edit'> Edit opportunity </a>
+  <a href='/organizations/opportunities/<%=opportunity.id%>/delete'> Delete opportunity </a>
+<% end %>
