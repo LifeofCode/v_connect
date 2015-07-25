@@ -17,15 +17,13 @@
     <div class = "profile-box">
       <div class = "format">
         <div class = "vertical-space-format">
+        
           <h3> Favourite Organizations </h3>
             <% @organizations.each do |organization| %>
 
               <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
               <form method="post" action="/favourite">
-                <input name="_method" type="hidden" value="delete" />
-                  <input  class="btn btn-danger" type="submit" value="Favourited" title="Click to de-favourite this organization">
-                  <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
-                  <input type="hidden" name='redirect' value='/students/profile'> 
+                <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
               </form>
 
             <% end %>

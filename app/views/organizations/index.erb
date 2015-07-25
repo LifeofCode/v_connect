@@ -10,10 +10,7 @@
     <form method="post" action="/favourite">
 
       <% if @student_favs.include?(organization.id) %>
-      <input name="_method" type="hidden" value="delete" />
-        <input  class="btn btn-danger" type="submit" value="Favourited" title="Click to de-favourite this organization">
-        <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
-        <input type="hidden" name='redirect' value='/organizations'> 
+        <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
       <% else %>
         <input  class="btn btn-success" type="submit" value="Favourite">
         <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
