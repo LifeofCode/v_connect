@@ -47,6 +47,10 @@ get '/students/organizations' do
   erb :'organizations/index'
 end
 
+get '/students/:id' do 
+  erb :'students/show'
+end
+
 # create new student
 post '/students' do
   @student = Student.new(params[:student])

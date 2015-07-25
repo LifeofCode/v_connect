@@ -2,24 +2,32 @@
   <div class="col-lg-6">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Seine_wide.jpg" alt="..." class="img-thumbnail">
     <h1 class = "profile-name"> <%= current_student.first_name%> <%= current_student.last_name %> 
-    <a href='/students/edit'><small>Edit Profile</small></a></h1>
+
+    <% if @organizations %>
+      <a href='/students/edit'><small>Edit Profile</small></a></h1>
+    <% end %>
+
     <div class = "profile-box">
       <div class = "format">
-        <h3> About me </h3>
-        <h4> Email: </h4> <%= current_student.email%>
-        <h4> Phone Number: </h4> <%= current_student.phone_number%>
+        <h4> About me: </h4>
+          <h5> <%= current_student.about %> </h5>
+        <h4> Email: </h4> 
+          <h5> <%= current_student.email%> </h5> 
+        <h4> Phone Number: </h4> 
+          <h5> <%= current_student.phone_number%> </h5>
       </div>
     </div>
   </div>
-
-  <div class = "col-lg-6">
-    <div class = "profile-box">
-      <div class = "format">
-        <div class = "vertical-space-format">
-          <h3> Favourite Organizations </h3>
-          <%= erb :'partials/_organizations' %>
+  <% if @organizations %>
+    <div class = "col-lg-6">
+      <div class = "profile-box">
+        <div class = "format">
+          <div class = "vertical-space-format">
+            <h3> Favourite Organizations </h3>
+            <%= erb :'partials/_organizations' %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
