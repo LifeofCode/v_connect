@@ -41,6 +41,7 @@ get '/organizations/edit' do
   auth_org!
   erb :'/organizations/edit'
 end
+
 # show posts by organization
 get '/organizations/opportunities' do
   @organization = current_org
@@ -49,6 +50,11 @@ end
 
 get '/organizations/opportunities/new' do
   erb :'/opportunities/new'
+end
+
+get '/organizations/:id' do 
+  @organization = Organization.find(params[:id])
+  erb :'organizations/show'
 end
 
 #an organization can see a list of interested students
@@ -100,6 +106,7 @@ put '/organizations' do
     erb :'organizations/edit'
   end
 end 
+
 get '/organizations/opportunities/:id' do 
   @opportunity = Opportunity.find(params[:id])
   @organization = @opportunity.organization
