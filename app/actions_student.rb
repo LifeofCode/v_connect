@@ -1,12 +1,17 @@
 #display all students that are registered
-get '/students' do 
+get '/students' do
   @students = Student.all
   erb :'students/index'
 end
 
 # organization can search for student by first and last names
 get '/students/search' do
+  redirect '/students' if params[:keyword].empty?
   @students = Student.where("lower(first_name) LIKE ? OR lower(last_name) LIKE ?", "%#{params[:keyword].downcase}%", "%#{params[:keyword].downcase}%")
+  if @students.empty?
+    @errors << "Cannot find student with #{params[:keyword]}"
+    @students = Student.all
+  end
   erb :'students/index'
 end
 
@@ -29,7 +34,7 @@ get '/students/profile' do
   auth_student!
   @student = current_student
   @organizations = current_student.organizations
-  @student_favs = @organizations.map {|organization| organization.id}
+  @opportunities = current_student.opportunities
   erb :'/students/show'
 end
 
@@ -40,14 +45,22 @@ get '/students/edit' do
 end
 
 #a student can see their favourite organizations
+# TODO: is this neccessary? Since the info is already on the profile page
+# At the very least, split into a partial instead of using organiaztions/index.erb
 get '/students/organizations' do
   auth_student!
+  check_favourites
   @organizations = current_student.organizations
-  @student_favs = []
-  @student_favs = @organizations.map {|organization| organization.id}
   erb :'organizations/index'
 end
 
+get '/students/opportunities' do
+  auth_student!
+  @opportunities = current_student.opportunities
+  erb :'/opportunities/index'
+end
+
+# Display a student's public profile
 get '/students/:id' do 
   @student = Student.find(params[:id])
   erb :'students/show'
@@ -93,20 +106,18 @@ put '/students' do
 end
 
 post '/favourite' do 
-  @fav_found = Favourite.exists?(student_id: session[:id], organization_id: params[:organization_id])
-  @student_favs = []
-  @organizations = Organization.all
-  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student?
-
-  if @fav_found
-    @errors << "You've already favoured this organization, you can see it on your profile :)"
-    erb :'/organizations/index'  
-  else
-    Favourite.create(
+  @new_fav = Favourite.new(
       student_id: session[:id],
       organization_id: params[:organization_id]
     )
+  if @new_fav.save
     redirect '/organizations'
+  else
+    @errors = @new_fav.errors.messages[:student]
+  # TODO: dry this out
+    check_favourite
+    @organizations = Organization.all
+    erb :'organizations/index'
   end
 end
 
@@ -116,7 +127,9 @@ delete '/favourite' do
     student_id: session[:id], 
     organization_id: params[:organization_id]
   )
-  @favourite.destroy
-  redirect '/organizations'
-  # TODO: redirect to student profile
+  # TODO: prevent redirect to blank page when 
+  if @favourite
+    @favourite.destroy 
+    redirect "#{params[:redirect]}"
+  end
 end

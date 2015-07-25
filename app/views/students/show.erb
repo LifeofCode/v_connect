@@ -1,9 +1,9 @@
-<div class="col-lg-12">
+<div class="row">
   <div class="col-lg-6">
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Seine_wide.jpg" alt="..." class="img-thumbnail">
     <h1 class = "profile-name"> <%= @student.first_name%> <%= @student.last_name %> 
 
-    <% if @organizations %>
+    <% if current_student? %>
       <a href='/students/edit'><small>Edit Profile</small></a></h1>
     <% end %>
 
@@ -22,16 +22,29 @@
       </div>
     </div>
   </div>
-  <% if @organizations %>
-    <div class = "col-lg-6">
-      <div class = "profile-box">
-        <div class = "format">
-          <div class = "vertical-space-format">
-            <h3> Favourite Organizations </h3>
-            <%= erb :'partials/_organizations' %>
-          </div>
+
+  <% if current_student? %>
+  <div class = "col-lg-6">
+    <div class = "profile-box">
+      <div class = "format">
+        <div class = "vertical-space-format">
+        <% if @organizations.any? %>
+        <h3> Favourite Organizations </h3>
+        <a href = '/students/opportunities'><div class = "btn btn-primary">See Opportunities</div></a>
+          <% @organizations.each do |organization| %>
+            <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
+            <form method="post" action="/favourite">
+              <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
+            </form>
+          <% end %>
+        <% else %>
+          <h3>You haven't favourited any organizations yet. 
+          <br>
+          <a href="/organizations">Browse Organizations</a></h3>
+        <% end %>
         </div>
       </div>
     </div>
+  </div>
   <% end %>
-</div>
+</div><!-- .row -->

@@ -1,17 +1,20 @@
 #students can see a list of all organizations that are registered
 get '/organizations' do 
-  #TODO: change when sessions/login/authorization is finished
-  @student_favs = []
-  @student_favs = Favourite.where(student_id: current_student.id).pluck(:organization_id)
+  auth_student!
+  check_favourites
   @organizations = Organization.all
   erb :'organizations/index'
 end
 
 # student can search for organization by name
 get '/organizations/search' do
-  @student_favs = []
-  @student_favs = current_student.organizations.map {|organization| organization.id} if current_student?
+  check_favourites
+  redirect '/organizations' if params[:keyword].empty?
   @organizations = Organization.where("lower(name) LIKE ?", "%#{params[:keyword].downcase}%")
+  if @organizations.empty?
+    @errors << "Cannot find organization with #{params[:keyword]}"
+    @organizations = Organization.all
+  end
   erb :'organizations/index'
 end
 
@@ -29,11 +32,11 @@ get '/organizations/session' do
   erb :'organizations/login'
 end
 
-
 get '/organizations/profile' do
   auth_org!
   @organization = current_org
-  @students = @organization.students
+  @students = current_org.students
+  @opportunities = current_org.opportunities
   erb :'/organizations/show'
 end
 
@@ -42,31 +45,22 @@ get '/organizations/edit' do
   erb :'/organizations/edit'
 end
 
-# show posts by organization
+# list opportunities by organization
 get '/organizations/opportunities' do
+  auth_org!
   @organization = current_org
+  @opportunities = current_org.opportunities
   erb :'/opportunities/index'
 end
 
 get '/organizations/opportunities/new' do
+  auth_org!
   erb :'/opportunities/new'
 end
 
-get '/organizations/:id' do 
+get '/organizations/:id' do
   @organization = Organization.find(params[:id])
-  erb :'organizations/show'
-end
-
-#an organization can see a list of interested students
-get '/organizations/:id/students' do
-  #TODO: refactor erb file using partials
-  auth_org!
-  @students = @organization.students
-  erb :'students/index'
-end
-
-get '/organizations/:id' do 
-  @organization = Organization.find(params[:id])
+  @opportunities = @organization.opportunities
   erb :'organizations/show'
 end
 
@@ -97,7 +91,6 @@ end
 # edit organization profile
 put '/organizations' do
   auth_org!
-  # TODO: clearing the name will also clear the name in the nav bar
   if @organization.update(params[:org])
     session[:name] = @organization.name
     redirect '/organizations/profile'

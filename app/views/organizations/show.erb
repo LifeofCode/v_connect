@@ -21,11 +21,11 @@
           <h4> Phone Number: </h4> <%= @organization.phone_number%>
         <% end %>
       </div>
-    </div>
-  </div>
+    </div><!-- .profile-box -->
+    </div><!-- organization profile .col-lg-6 -->
 
-  <% if @students %>
-    <div class = "col-lg-6">
+    <% if current_org? && @students %>
+    <div class = "col-lg-6"><!-- Interested Students -->
       <div class = "profile-box">
         <div class = "format">
           <div class = "vertical-space-format">
@@ -41,7 +41,13 @@
         <div class = "format">
           <div class = "vertical-space-format">
             <h3> Volunteer Opportunities</h3>
-            <%= erb :'partials/_opportunities' %>
+            <% if @opportunities.any? %>
+                <% @opportunities.each do |opportunity| %>
+                  <%= erb :'partials/_opportunities', locals: { opportunity: opportunity } %>
+                <% end %>
+            <% else %>
+                <h3>No current opportunities</h3>
+            <% end %>
           </div>
         </div>
       </div>

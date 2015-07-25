@@ -1,1 +1,16 @@
-<%= erb :'partials/_opportunities' %>
+<% if current_student? %>
+  <h1>My Opportunities</h1>
+<% elsif current_org? %>
+  <a href = '/organizations/opportunities/new'><h3> Add a new opportunity </h3></a>
+<% end %>
+
+<% if @opportunities.any? %>
+    <% @opportunities.each do |opportunity| %>
+      <%= erb :'partials/_opportunities', locals: { opportunity: opportunity } %>
+      <% if !current_org? %>
+      Organization: <a href="/organizations/<%= opportunity.organization.id %>" ><%= opportunity.organization.name %></a>
+      <% end %>
+    <% end %>
+<% else %>
+    <h3>No current opportunities</h3>
+<% end %>
