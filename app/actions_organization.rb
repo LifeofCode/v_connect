@@ -65,6 +65,11 @@ get '/organizations/:id/students' do
   erb :'students/index'
 end
 
+get '/organizations/:id' do 
+  @organization = Organization.find(params[:id])
+  erb :'organizations/show'
+end
+
 # create new organization
 post '/organizations' do
   @organization = Organization.new(params[:org])
