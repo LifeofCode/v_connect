@@ -1,4 +1,5 @@
 <h1>Home Page</h1>
+<% if !(current_student? || current_org?) %>
 <h2>Student</h2>
 <a href='students/session'>login</a>
 <a href='students/register'>register</a>
@@ -6,3 +7,4 @@
 <h2>Organization</h2>
 <a href='organizations/session'>login</a>
 <a href='organizations/register'>register</a>
+<% end %>

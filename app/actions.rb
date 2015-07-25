@@ -62,7 +62,6 @@ before do
 end
 
 get '/' do
-  logged_in!
   erb :index
 end
 
