@@ -52,6 +52,12 @@ get '/students/organizations' do
   erb :'organizations/index'
 end
 
+# Display a student's public profile
+get '/students/:id' do 
+  @student = Student.find(params[:id])
+  erb :'students/public'
+end
+
 # create new student
 post '/students' do
   @student = Student.new(params[:student])

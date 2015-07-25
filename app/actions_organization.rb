@@ -61,14 +61,6 @@ get '/organizations/:id' do
   erb :'organizations/show'
 end
 
-#an organization can see a list of interested students
-get '/organizations/:id/students' do
-  #TODO: refactor erb file using partials
-  auth_org!
-  @students = @organization.students
-  erb :'students/index'
-end
-
 # create new organization
 post '/organizations' do
   @organization = Organization.new(params[:org])
