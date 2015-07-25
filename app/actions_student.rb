@@ -94,17 +94,15 @@ post '/favourite' do
   # TODO: using active record to display the error
   @new_fav.save!
   # @errors = @new_fav.errors if !@new_fav.save
-
   redirect '/organizations'
 end
 
-delete '/favourite/:from' do
+delete '/favourite' do
   auth_student!
   @favourite = Favourite.find_by(
     student_id: session[:id], 
     organization_id: params[:organization_id]
   )
   @favourite.destroy
-  redirect "#{params[:from]}"
-  # TODO: redirect to student profile
+  redirect "/#{params[:redirect]}"
 end
