@@ -5,10 +5,14 @@
 <% end %>
 
 <h5> 
-  <a href="/organizations/<%= organization.id %>" > <%= organization.name %> </a> 
+  <a href="/organizations/<%= organization.id %>" > <%= organization.name %> 
+
+  </a> 
 </h5>
 
-<p class="psize">Email: <%= organization.email %> </br>
+<p class="psize"> 
+  <span class="badge">All Likes: <%= organization.favourites_count %></span>
+  Email: <%= organization.email %> </br>
   <% if organization.phone_number %>
     Phone Number: <%= organization.phone_number %>
   <% end %>
