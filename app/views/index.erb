@@ -1,10 +1,44 @@
-<h1>Home Page</h1>
 <% if !(current_student? || current_org?) %>
-<h2>Student</h2>
-<a href='students/session'>login</a>
-<a href='students/register'>register</a>
 
-<h2>Organization</h2>
-<a href='organizations/session'>login</a>
-<a href='organizations/register'>register</a>
+
 <% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col s6 center">
+      <h2>Student</h2>
+      <a href='students/register' class="waves-effect waves-light btn">register</a>
+      <a href='students/session' class="waves-effect waves-light btn">login</a>
+    </div><!-- student col -->
+    <div class="col s6 center">
+      <h2>Organization</h2>
+      <a href='organizations/register' class="waves-effect waves-light btn">register</a>
+      <a href='organizations/session' class="waves-effect waves-light btn">login</a>
+    </div><!-- organization col -->
+  </div>
+</div><!-- .container -->
+<div class="divider"></div>
+<!-- Promo -->
+  <div class="row">
+    <div class="col s4">
+      <div class="center promo promo-example">
+        <i class="large material-icons">people_outline</i>
+        <p class="promo-caption">Browse Organizations</p>
+        <p class="light center">blah blah blah something about connecting student to organization</p>
+      </div>
+    </div>
+      <div class="col s4">
+      <div class="center promo promo-example">
+        <i class="large material-icons">star_border</i>
+        <p class="promo-caption">Follow</p>
+        <p class="light center">blah blah blah something about keeping up-to-date with your favourite non-profits</p>
+      </div>
+    </div>
+    <div class="col s4">
+       <div class="center promo promo-example">
+        <i class="large material-icons">search</i>
+        <p class="promo-caption">View Opportunities</p>
+        <p class="light center">blah blah blah something about connecting student to volunteer opportunities</p>
+      </div>
+    </div>
+  </div><!-- .row promo -->
