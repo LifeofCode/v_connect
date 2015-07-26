@@ -27,35 +27,18 @@
   <nav>
     <div class="nav-wrapper">
       <a href="/" class="brand-logo"> <span>&#160;&#160;&#160;V_Connect </span></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <!-- Dropdown Trigger -->
-        <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons right">&#9776;</i></a></li>
-        <li><a href="/students/profile"><%= session_name %></a></li>
-      </ul>
-    
-
   <%if current_student? %>
       <form method="get" action="/organizations/search">
         <div class="input-field">
-          <ul class="right hide-on-med-and-down">
-          <input id="search" type="search" name="keyword" placeholder="Search for organization" required>
+          <ul id="nav-mobile"class="right hide-on-med-and-down">
+          <li><a href="/students/profile"> <span class="font"> <%= session_name %> <span> </a></li>
+          <!-- Dropdown Trigger -->
+          <li> <input id="search" type="search" name="keyword" placeholder="Search for organization" required></li>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons right">&#9776;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</i></a></li>
           </ul>
         </div>
       </form>
-      <!-- Collect the nav links, forms, and other content for toggling -->
 
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="/organizations">Browse organizations</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="/logout">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
 <%elsif current_org? %>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

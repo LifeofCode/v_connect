@@ -41,6 +41,10 @@
 }
 
 .bar-space {
-  padding-left: 1em;
+  padding-right: 10em;
+}
+
+.font {
+  font-size: 1.5em;
 }
 
