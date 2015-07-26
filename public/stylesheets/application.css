@@ -52,3 +52,13 @@
   display: relative;
 }
 
+.contain {
+  margin-left: 10em;
+  width: 30em;
+  display: inline-block;
+}
+
+.center {
+  margin-left: 5em;
+  margin-right: 6em;
+}
