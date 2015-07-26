@@ -4,7 +4,7 @@
 
 <% @organizations.each do |organization| %>
   <div class="contain"> 
-  <ul class="collection card small">
+  <ul class="collection card small z-depth-5">
     <li class="collection-item avatar">
     <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
     <% if current_student? %>
