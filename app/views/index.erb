@@ -13,42 +13,29 @@
       <a href='organizations/session' class="waves-effect waves-light btn">login</a>
     </div><!-- organization col -->
   </div>
-  
 </div><!-- .container -->
+<% end %>
+
 
 <!-- banner -->
-<div class='bgimg center'></div> 
-
-<!-- about us -->
-<div class="container center">
-    <div class="row home-login">
-      <h4>V connect students with volunteer opportunities</h4>
-    </div>
-
-    <!-- Promo -->
-    <div class="row">
-      <div class="col s4">
-        <div class="center promo promo-example">
-          <i class="medium material-icons">people_outline</i>
-          <p class="promo-caption">Browse Organizations</p>
-          <p class="light">blah blah blah something about connecting student to organization</p>
-        </div>
-      </div>
-        <div class="col s4">
-        <div class="center promo promo-example">
-          <i class="medium material-icons">star_border</i>
-          <p class="promo-caption">Follow</p>
-          <p class="light">blah blah blah something about keeping up-to-date with your favourite non-profits</p>
-        </div>
-      </div>
-      <div class="col s4">
-         <div class="center promo promo-example">
-          <i class="medium material-icons">search</i>
-          <p class="promo-caption">View Opportunities</p>
-          <p class="light">blah blah blah something about connecting student to volunteer opportunities</p>
-        </div>
-      </div>
-    </div><!-- .row promo -->
+<div class="center">
+  <div class='bgimg'></div> 
+  <div class="row home-login">
+    <h4>V Connect</h4>
+    <h5>Connect Volunteers with Non-Profits</h5>
+  </div>
 </div>
 
-<% end %>
+<%= erb :'/promo' %>
+
+<!-- footer: about us -->
+<footer class='page-footer'>
+<div class="container">
+<%= erb :'/footer' %>
+</div>
+<div class="footer-copyright">
+  <div class="container">
+    Made by: 
+  </div>
+</div>
+</footer>
