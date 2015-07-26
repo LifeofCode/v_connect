@@ -1,14 +1,15 @@
+<% if !organization.picture.blank? %>
+  <img src="<%= organization.picture %>" alt="" class="circle">
+<% else %>
+  <img src="http://www.deerparkpta.org/wp-content/uploads/2012/08/Volunteer-Button-20141.jpg" alt="" class="circle">
+<% end %>
 
-    <% if !organization.picture.blank? %>
-      <img src="<%= organization.picture %>" alt="" class="circle">
-    <% else %>
-      <img src="http://www.deerparkpta.org/wp-content/uploads/2012/08/Volunteer-Button-20141.jpg" alt="" class="circle">
-    <% end %>
-    <h5> 
-      <a href="/organizations/<%= organization.id %>" > <%= organization.name %> </a> 
-    </h5>
-    <p>Email: <%= organization.email %> <br>
-      <% if organization.phone_number %>
-        Phone Number: <%= organization.phone_number %>
-      <% end %>
-    </p> 
+<h5> 
+  <a href="/organizations/<%= organization.id %>" > <%= organization.name %> </a> 
+</h5>
+
+<p>Email: <%= organization.email %> <br>
+  <% if organization.phone_number %>
+    Phone Number: <%= organization.phone_number %>
+  <% end %>
+</p> 

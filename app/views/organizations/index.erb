@@ -4,7 +4,7 @@
 
 <% @organizations.each do |organization| %>
   <div class="contain"> 
-  <ul class="collection">
+  <ul class="collection card small">
     <li class="collection-item avatar">
     <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
 
