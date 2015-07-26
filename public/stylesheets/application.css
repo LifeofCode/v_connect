@@ -43,3 +43,11 @@
 .bar-space {
   padding-left: 1em;
 }
+
+.bgimg {
+    background-image: url('/images/shutterstock-volunteer-1286x334.jpg');
+    background-repeat: no-repeat;
+    min-height: 334px;
+    background-size: cover;
+    box-shadow: 0px 0px 20px 0px #888888;
+}

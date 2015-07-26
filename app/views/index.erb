@@ -1,44 +1,55 @@
 <% if !(current_student? || current_org?) %>
-
-
-<% end %>
-
-<div class="container">
+<!-- login and register -->
+<div class="container ">
   <div class="row">
     <div class="col s6 center">
-      <h2>Student</h2>
+      <h3 class="header">Student</h3>
       <a href='students/register' class="waves-effect waves-light btn">register</a>
       <a href='students/session' class="waves-effect waves-light btn">login</a>
     </div><!-- student col -->
     <div class="col s6 center">
-      <h2>Organization</h2>
+      <h3 class="header">Organization</h3>
       <a href='organizations/register' class="waves-effect waves-light btn">register</a>
       <a href='organizations/session' class="waves-effect waves-light btn">login</a>
     </div><!-- organization col -->
   </div>
+  
 </div><!-- .container -->
-<div class="divider"></div>
-<!-- Promo -->
-  <div class="row">
-    <div class="col s4">
-      <div class="center promo promo-example">
-        <i class="large material-icons">people_outline</i>
-        <p class="promo-caption">Browse Organizations</p>
-        <p class="light center">blah blah blah something about connecting student to organization</p>
-      </div>
+
+<!-- banner -->
+<div class='bgimg center'></div> 
+
+<!-- about us -->
+<div class="container center">
+    <div class="row">
+      <h4>about us</h4>
+      <h5>connecting students with volunteer opportunities</h5>
     </div>
+
+    <!-- Promo -->
+    <div class="row">
       <div class="col s4">
-      <div class="center promo promo-example">
-        <i class="large material-icons">star_border</i>
-        <p class="promo-caption">Follow</p>
-        <p class="light center">blah blah blah something about keeping up-to-date with your favourite non-profits</p>
+        <div class="center promo promo-example">
+          <i class="medium material-icons">people_outline</i>
+          <p class="promo-caption">Browse Organizations</p>
+          <p class="light center">blah blah blah something about connecting student to organization</p>
+        </div>
       </div>
-    </div>
-    <div class="col s4">
-       <div class="center promo promo-example">
-        <i class="large material-icons">search</i>
-        <p class="promo-caption">View Opportunities</p>
-        <p class="light center">blah blah blah something about connecting student to volunteer opportunities</p>
+        <div class="col s4">
+        <div class="center promo promo-example">
+          <i class="medium material-icons">star_border</i>
+          <p class="promo-caption">Follow</p>
+          <p class="light center">blah blah blah something about keeping up-to-date with your favourite non-profits</p>
+        </div>
       </div>
-    </div>
-  </div><!-- .row promo -->
+      <div class="col s4">
+         <div class="center promo promo-example">
+          <i class="medium material-icons">search</i>
+          <p class="promo-caption">View Opportunities</p>
+          <p class="light center">blah blah blah something about connecting student to volunteer opportunities</p>
+        </div>
+      </div>
+    </div><!-- .row promo -->
+</div>
+
+<% end %>
