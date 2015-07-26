@@ -1,3 +1,7 @@
-<input  class="btn btn-success" type="submit" value="Favourite" <% if request.fullpath == '/favourite' %> disabled <%end%>>
+<button  class=" secondary-content btn-floating waves-effec waves-light grey" type="submit" value="Favourite" title="Click to favourite this organization" 
+  <% if request.fullpath == '/favourite' %> disabled <%end%> >
+  <i class="material-icons">grade</i> 
+</button>
+
 <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
 <input type="hidden" name='redirect' value='<%= request.fullpath %>'>

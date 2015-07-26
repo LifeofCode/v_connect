@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20150726161634) do
+=======
 ActiveRecord::Schema.define(version: 20150726003854) do
+>>>>>>> d8bf31e1d978a32ece2374627b75ee45ab32fb77
 
   create_table "favourites", force: :cascade do |t|
     t.integer  "organization_id"
@@ -41,6 +45,10 @@ ActiveRecord::Schema.define(version: 20150726003854) do
     t.datetime "updated_at",                   null: false
     t.string   "password_digest"
     t.integer  "favourites_count", default: 0
+<<<<<<< HEAD
+    t.string   "picture"
+=======
+>>>>>>> d8bf31e1d978a32ece2374627b75ee45ab32fb77
   end
 
   create_table "students", force: :cascade do |t|

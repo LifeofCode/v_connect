@@ -17,9 +17,7 @@ end
 
 # student sign up page
 get '/students/register' do
-  # redirect to profile page if user is already logged in
   logged_in!
-  # create a blank student so entered data can be saved when registration fails
   @student = Student.new
   erb :'students/new'
 end
@@ -71,7 +69,6 @@ post '/students' do
   @student = Student.new(params[:student])
   @student.password = params[:password]
   @student.password_confirmation = params[:password2]
-
   if @student.save
     login_user(@student.id, 'student')
   else
