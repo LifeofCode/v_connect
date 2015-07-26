@@ -8,13 +8,11 @@
 
   <% if current_student? %>
     <form method="post" action="/favourite">
-
       <% if @student_favs.include?(organization.id) %>
         <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
       <% else %>
         <%= erb :'partials/_favourite_button', locals: { organization: organization } %>        
       <% end %>
-    
     </form>
   <% end %>
 <% end %>
