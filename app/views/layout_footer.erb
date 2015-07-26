@@ -11,14 +11,18 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-   <!-- Compiled and minified JavaScript -->
+    <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
   <script src="/javascript/application.js"></script>
   <title></title>
 </head>
 
-<body>
-<%= erb :'/_navbar' %>
+<body class="site">
+  <main class="site-content">
+  <%= erb :'/_navbar' %>
   <%= yield %>
+  </main>
+  <!-- footer: about us -->
+  <%= erb :'/_footer' %>
 </body>
 </html>

@@ -62,7 +62,7 @@ before do
 end
 
 get '/' do
-  erb :index
+  erb :index , layout: :layout_footer
 end
 
 get '/logout' do

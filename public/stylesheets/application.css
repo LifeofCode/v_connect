@@ -62,3 +62,14 @@
 .promo {
   padding:  0em 1em 0em 1em;
 }
+
+/*For Sticky Footer*/
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}
