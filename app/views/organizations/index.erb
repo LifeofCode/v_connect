@@ -1,13 +1,12 @@
 <%= erb :'partials/_errors' %>
-
-<h1 class="center"> Registered Organizations</h1>  
+<div class="layoutcolor" >
+<h1 class="center dark-grey-text"> Registered Organizations</h1>  
 
 <% @organizations.each do |organization| %>
   <div class="contain"> 
   <ul class="collection card small">
     <li class="collection-item avatar">
     <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
-
     <% if current_student? %>
       <form method="post" action="/favourite">
         <% if @student_favs.include?(organization.id) %>
@@ -21,3 +20,4 @@
   </ul>
   </div>  
 <% end %>
+</div>
