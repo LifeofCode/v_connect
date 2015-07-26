@@ -1,3 +1,3 @@
-<input  class="btn btn-success" type="submit" value="Favourite">
+<input  class="btn btn-success" type="submit" value="Favourite" <% if request.fullpath == '/favourite' %> disabled <%end%>>
 <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
 <input type="hidden" name='redirect' value='<%= request.fullpath %>'>

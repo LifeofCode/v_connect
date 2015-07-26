@@ -110,14 +110,8 @@ post '/favourite' do
       student_id: session[:id],
       organization_id: params[:organization_id]
     )
-  if @new_fav.save
-    redirect "#{params[:redirect]}"
-  else
-    @errors = @new_fav.errors.messages[:student]
-    check_favourites
-    @organizations = Organization.all
-    erb :'organizations/index'
-  end
+  @new_fav.save if @new_fav
+  redirect "#{params[:redirect]}"
 end
 
 delete '/favourite' do
@@ -126,9 +120,6 @@ delete '/favourite' do
     student_id: session[:id], 
     organization_id: params[:organization_id]
   )
-  # TODO: prevent redirect to blank page when unfavourite is clicked
-  if @favourite
-    @favourite.destroy 
-    redirect "#{params[:redirect]}"
-  end
+  @favourite.destroy if @favourite
+  redirect "#{params[:redirect]}"
 end
