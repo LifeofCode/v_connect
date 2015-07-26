@@ -1,7 +1,13 @@
-<div> 
-  <a href="/organizations/<%= organization.id %>" > <%= organization.name %> </a>
-  <h5> Email: <%= organization.email %></h5> 
-  <% if organization.phone_number %>
-    <h5> Phone Number: <%= organization.phone_number %> </h5>
-  <% end %>
-</div>  
+  <ul class="collection">
+    <li class="collection-item avatar">
+      <img src="images/yuna.jpg" alt="" class="circle">
+      <h5>
+        <a href="/organizations/<%= organization.id %>" > <%= organization.name %> </a> 
+      </h5>
+      <p>Email: <%= organization.email %> <br>
+        <% if organization.phone_number %>
+          Phone Number: <%= organization.phone_number %>
+        <% end %>
+      </p>
+      
+    </li>
