@@ -1,4 +1,4 @@
 <input name="_method" type="hidden" value="delete" />
-<input  class="btn btn-danger" type="submit" value="Favourited" title="Click to de-favourite this organization">
+<input  class="btn" type="submit" value="Favourited" title="Click to de-favourite this organization" <% if request.fullpath == '/favourite' %> disabled <%end%> >
 <input type="hidden" name='organization_id' value='<%= organization.id %>'> 
 <input type="hidden" name='redirect' value='<%= request.fullpath %>'> 

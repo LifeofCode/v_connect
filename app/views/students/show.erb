@@ -1,50 +1,55 @@
 <div class="row">
-  <div class="col-lg-6">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Seine_wide.jpg" alt="..." class="img-thumbnail">
-    <h1 class = "profile-name"> <%= @student.first_name%> <%= @student.last_name %> 
-
-    <% if current_student? %>
-      <a href='/students/edit'><small>Edit Profile</small></a></h1>
-    <% end %>
-
-    <div class = "profile-box">
-      <div class = "format">
-        <% if !@student.about.blank? %>
-          <h4> About me: </h4>
-          <h5> <%= @student.about %> </h5>
-        <% end %>
-          <h4> Email: </h4> 
-          <h5> <%= @student.email%> </h5> 
-        <% if !@student.phone_number.blank? %>
-          <h4> Phone Number: </h4> 
-          <h5> <%= @student.phone_number%> </h5>
-        <% end %>
+  <div class="col s4 offset-s1">
+    <div class="card blue">
+    <div class="card-image">
+      <img class="responsive-img image-card" src="https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg">
+    </div>
+      <div class="card-content white-text">
+        <span class="card-title"><%= @student.first_name%> <%= @student.last_name %></span>    
+          <br>
+          <% if !@student.about.blank? %>
+            <h5> <%= @student.about %> </h5>
+            <br>
+          <% end %>
+          <strong> Email: </strong> <br> 
+          <%= @student.email%>  
+          <% if !@student.phone_number.blank? %>
+            <strong> Phone Number: </strong> 
+          <%= @student.phone_number%>
+          <% end %>
+          <br>
+          <br>
+          <% if current_student? %>
+            <div class="card-action">
+              <a href='/students/edit'>Edit Profile</a>
+            </div>
+          <% end %>
       </div>
     </div>
   </div>
 
-  <% if current_student? %>
-  <div class = "col-lg-6">
-    <div class = "profile-box">
-      <div class = "format">
-        <div class = "vertical-space-format">
+  <div class="col s6 ">
+    <div class="card">
+      <div class="card-content">
         <% if @organizations.any? %>
-        <h3> Favourite Organizations </h3>
-        <a href = '/students/opportunities'><div class = "btn btn-primary">See Opportunities</div></a>
+          <span class="card-title-dark">Favourite Organizations</span>
+          <div class="card-action">
+            <a href = '/students/opportunities'>See Opportunities</a>
+          </div>
           <% @organizations.each do |organization| %>
             <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
-            <form method="post" action="/favourite">
-              <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
-            </form>
+          <form method="post" action="/favourite">
+            <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
+          </form>
           <% end %>
-        <% else %>
-          <h3>You haven't favourited any organizations yet. 
-          <br>
-          <a href="/organizations">Browse Organizations</a></h3>
+          <% else %>
+            <span class="card-title-dark">You haven't favourited any organizations yet</span>          <br>
+            <br>
+          <div class="card-action">
+            <a href="/organizations">Browse Organizations</a></h3>
+          </div>   
         <% end %>
-        </div>
       </div>
     </div>
   </div>
-  <% end %>
-</div><!-- .row -->
+</div>
