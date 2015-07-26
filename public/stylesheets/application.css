@@ -45,9 +45,18 @@
 }
 
 .bgimg {
-    background-image: url('/images/shutterstock-volunteer-1286x334.jpg');
-    background-repeat: no-repeat;
-    min-height: 334px;
-    background-size: cover;
-    box-shadow: 0px 0px 20px 0px #888888;
+  background-image: url('/images/shutterstock-volunteer-1286x334.jpg');
+  background-position: center center, center top;
+  background-repeat: no-repeat;
+  /*background-size: cover;*/
+  min-height: 334px;
+  box-shadow: 0px 0px 20px 0px #888888;
+}
+
+.home-login {
+  padding: 2em;
+}
+
+.promo {
+  padding:  0em 1em 0em 1em;
 }
