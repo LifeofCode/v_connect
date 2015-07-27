@@ -1,9 +1,15 @@
  <div class="row">
   <div class="col s4 offset-s1">
     <div class="card blue">
-    <div class="card-image">
-      <img class="responsive-img image-card" src="https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg">
-    </div>
+    <% if @organization.picture %>
+      <div class="card-image">
+        <img class="responsive-img image-card" src="<%=@organization.picture %>">
+      </div>
+    <% else %>
+      <div class="card-image">
+        <img class="responsive-img image-card" src="https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg">
+      </div>
+    <% end %>
       <div class="card-content white-text">
         <span class="card-title"><%= @organization.name%></span>    
           <br>
@@ -17,7 +23,7 @@
           <br>
           <% if current_org? %>
             <div class="card-action">
-              <a href='/organizations/edit'>Edit Profile</a>
+              <p class="psize"> <a href='/organizations/edit'>Edit Profile</a> </p>
             </div>
           <% end %>
       </div>
@@ -42,7 +48,7 @@
             <span class="card-title-dark"> Volunteer Opportunities</span>
             <% if @opportunities.any? %>
                 <% @opportunities.each do |opportunity| %>
-                  <%= erb :'partials/_opportunities', locals: { opportunity: opportunity } %>
+                  <%= erb :'partials/_opp_profile', locals: { opportunity: opportunity } %>
                 <% end %>
             <% else %>
                 <h3>No current opportunities</h3>

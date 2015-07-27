@@ -41,6 +41,7 @@
 }
 
 .card .card-title-dark {
+  text-align: center;
   color: #2B303B;
   font-size: 24px;
   font-weight: 300; }
