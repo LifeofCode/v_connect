@@ -1,18 +1,24 @@
 <%= erb :'partials/_errors' %>
-
-<h1> Registered Organizations</h1>  
+<div class="layoutcolor" >
+<h1 class="center dark-grey-text"> Registered Organizations</h1>  
 
 <% @organizations.each do |organization| %>
-
-  <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
-
-  <% if current_student? %>
-    <form method="post" action="/favourite">
-      <% if @student_favs.include?(organization.id) %>
-        <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
-      <% else %>
-        <%= erb :'partials/_favourite_button', locals: { organization: organization } %> 
-      <% end %>
-    </form>
-  <% end %>
+  <div class="contain"> 
+  <ul class="collection card small z-depth-5">
+    <li class="collection-item avatar">
+    <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
+    <% if current_student? %>
+      <form method="post" action="/favourite">
+        <% if @student_favs.include?(organization.id) %>
+          <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
+        <% else %>
+          <%= erb :'partials/_favourite_button', locals: { organization: organization } %> 
+        <% end %>
+      </form>
+    <% end %>
+    </li>
+  </ul>
+  </div>  
 <% end %>
+</div>
+

@@ -41,20 +41,21 @@
 }
 
 .bar-space {
-  padding-left: 1em;
+  padding-right: 10em;
 }
 
+/* home page banner*/
 .bgimg {
   background-image: url('/images/shutterstock-volunteer-1286x334.jpg');
   background-position: center center, center top;
   background-repeat: no-repeat;
-  /*background-size: cover;*/
   min-height: 334px;
   box-shadow: 0px 0px 20px 0px #888888;
   position: relative;
   z-index: -1;
 }
 
+/* padding for home page elements*/
 .home-login {
   padding: 2em;
 }
@@ -74,10 +75,56 @@
   flex: 1;
 }
 
+footer.page-footer {
+  background-color: #9900CC;
+}
 /* logo text effect */
 .logo-effect
 {
+  margin: 0 1em 0 1em;
   font-family: 'Sansita One', cursive;
   color: #9900CC;
   text-shadow: rgb(204, 204, 204) 1px 1px 0px, rgb(204, 204, 204) 2px 2px 0px, rgb(68, 68, 68) 3px 3px 0px, rgb(68, 68, 68) 4px 4px 0px, rgb(68, 68, 68) 5px 5px 0px, rgb(68, 68, 68) 6px 6px 0px;
+}
+
+.name {
+  display: relative;
+}
+
+.contain {
+  margin-top: 4em;
+  margin-left: 15em;
+  width: 30em;
+  display: inline-block;
+}
+
+/* List Heading */
+h1.center {
+  margin-top: 0em;
+  margin-left: 5em;
+  margin-right: 6em;
+  padding-top: 1em;
+}
+
+.cardcenter {
+  width: 25em;
+  padding-top: 3em; 
+  padding-right: 35em;
+  margin-left: -3em;
+}
+
+.psize {
+  font-size: 1.25em;
+}
+
+nav {
+  background-color: #9900CC;
+}
+
+.layoutcolor {
+  background-color: floralwhite;
+}
+
+.h {
+  font-color: #44C6F2;
 }
