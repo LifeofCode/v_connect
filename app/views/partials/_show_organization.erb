@@ -6,7 +6,6 @@
 
 <h5> 
   <a href="/organizations/<%= organization.id %>" > <%= organization.name %> 
-
   </a> 
 </h5>
 
@@ -18,6 +17,8 @@
   <% end %>
 </p> 
 
-<% if request.fullpath == '/organizations' %>
-  <div class="cardcenter"> <img class="activator" src="/images/cardpic.jpg" > </div>
+<% if  request.fullpath == '/organizations'%>
+  <div class="cardcenter"> 
+    <img class="activator" src="/images/cardpic.jpg" > 
+  </div>
 <% end %>

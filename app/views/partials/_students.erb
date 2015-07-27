@@ -1,6 +1,7 @@
 <% @students.each do |student| %>
   <div> 
                 <div class="card-action">
+<img src="<%= student.profile_pic %>" alt="" class="circle">
 <a href="/students/<%= student.id %>" > <%= student.first_name + ' ' + student.last_name %> </a> <br>
   </div>
 <% end %>
