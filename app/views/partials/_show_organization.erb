@@ -1,6 +1,6 @@
 <% if !organization.picture.blank? && request.fullpath == '/organizations' %>
   <img src="<%= organization.picture %>" alt="" class="circle">
-<% elsif  request.fullpath == '/organizations'%>
+<% elsif request.fullpath == '/organizations' %>
   <img src="http://canyonlandscarecenter.org/wp-content/uploads/2014/02/FOMCH_ICON.png" alt="" class="circle large">
 <% end %>
 
@@ -16,6 +16,7 @@
     Phone Number: <%= organization.phone_number %>
   <% end %>
 </p> 
+
 <% if  request.fullpath == '/organizations'%>
   <div class="cardcenter"> 
     <img class="activator" src="/images/cardpic.jpg" > 

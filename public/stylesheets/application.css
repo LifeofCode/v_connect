@@ -40,6 +40,23 @@
   margin-top: 5em;
 }
 
+.card .card-title-dark {
+  color: #2B303B;
+  font-size: 24px;
+  font-weight: 300; }
+
+.image-card {
+  width: 15em;
+  position: relative;
+  overflow: hidden;
+  margin: 0rem 0 0rem 0;
+  background-color: #fff;
+  transition: box-shadow .25s;
+  border-radius: 2px; }
+
+}
+
+
 .bar-space {
   padding-right: 10em;
 }
@@ -134,6 +151,16 @@ nav {
   font-color: #44C6F2;
 }
 
+.card .card-action .left {
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
+  padding-top: 10px; 
+}
+
+.addopp{
+  display: inline;
+}
+
+
 /* 'button' color */
 .btn {
   background-color: indigo;
@@ -146,3 +173,4 @@ nav {
 input[type=text]:focus, textarea:focus { 
   border-bottom: 3px solid lightblue
 }
+
