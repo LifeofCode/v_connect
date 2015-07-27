@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- 
+  <!--
+    application.css is where you put your styles
+  -->
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
   <link rel="stylesheet" href="/stylesheets/application.css">
   <link href='http://fonts.googleapis.com/css?family=Sansita+One' rel='stylesheet' type='text/css'>  
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
- 
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-   <!-- Compiled and minified JavaScript -->
+    <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
   <script src="/javascript/application.js"></script>
   <title></title>
 </head>
 
-<body>
+<body class="site layoutcolor">
+  <main class="site-content">
   <%= erb :'/_navbar' %>
   <%= yield %>
+  </main>
+  <!-- footer: about us -->
+  <%= erb :'/_footer' %>
 </body>
 </html>
