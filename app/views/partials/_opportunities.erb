@@ -1,5 +1,12 @@
-  <h4 class="center indigo-text"><%= opportunity.title %></h4>
-  <p class="psize center"><%= opportunity.content %></p>
+<% if request.fullpath == '/organizations/opportunities' %>
+<h4 class="center indigo-text"><%= opportunity.title %></h4>
+<p class="psize center"><%= opportunity.content %></p>
+<% if current_student? %>
+  <p class="psize center"><strong> Organization: </strong>
+    <a href="/organizations/<%= opportunity.organization.id%>" ><%= opportunity.organization.name %>
+    </a>
+  </p>
+<% end %>
 <% if current_org? %>
   <a href='/organizations/opportunities/<%=opportunity.id%>/edit'> Edit opportunity </a>
   <a href='/organizations/opportunities/<%=opportunity.id%>/delete'> Delete opportunity </a>
@@ -9,3 +16,10 @@
   <img class="activator" src="/images/cardpic.jpg" > 
 </div>
 
+<% else %>
+
+<h5 class="indigo-text"><%= opportunity.title %></h5>
+<p class="psize"><%= opportunity.content %></p>
+<br>
+
+<%end%>
