@@ -1,7 +1,13 @@
 <% if current_student? %>
   <h1 class="headingcenter dark-grey-text">My Opportunities</h1>
 <% elsif current_org? %>
-  <a href = '/organizations/opportunities/new'><h3> Add a new opportunity </h3></a>
+  <h1 class="headingcenter dark-grey-text"> Our Opportunities</h1>
+  <h5>
+    <a class="btn-floating btn-large waves-effect waves-light red" href = '/organizations/opportunities/new'>
+      <i class="small material-icons" title="Add New Opportunity">add</i>
+    </a>
+    <strong> Add A New Opportunity </strong>
+  </h5>
 <% end %>
 
 <% if @opportunities.any? %>

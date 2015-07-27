@@ -153,5 +153,10 @@ nav {
 
 .card .card-action .left {
   border-top: 1px solid rgba(160, 160, 160, 0.2);
-  padding-top: 10px; }
+  padding-top: 10px; 
+}
+
+.addopp{
+  display: inline;
+}
 

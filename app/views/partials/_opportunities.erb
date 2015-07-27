@@ -1,9 +1,11 @@
+<% if current_org? %>
+  <div class="card-action"> 
+    <a href='/organizations/opportunities/<%=opportunity.id%>/edit'> <i class="small material-icons indigo-text" title="Click to Edit">edit</i></a> 
+    <a href='/organizations/opportunities/<%=opportunity.id%>/delete'> <i class="small material-icons indigo-text" title="Click To Delete">delete</i></a>
+  </div>
+<% end %>
   <h4 class="center indigo-text"><%= opportunity.title %></h4>
   <p class="psize center"><%= opportunity.content %></p>
-<% if current_org? %>
-  <a href='/organizations/opportunities/<%=opportunity.id%>/edit'> Edit opportunity </a>
-  <a href='/organizations/opportunities/<%=opportunity.id%>/delete'> Delete opportunity </a>
-<% end %>
 
 <div class="oppcardcenter"> 
   <img class="activator" src="/images/cardpic.jpg" > 
