@@ -1,12 +1,11 @@
-<% if !organization.picture.blank? %>
+<% if !organization.picture.blank? && request.fullpath == '/organizations' %>
   <img src="<%= organization.picture %>" alt="" class="circle">
-<% else %>
+<% elsif  request.fullpath == '/organizations'%>
   <img src="http://canyonlandscarecenter.org/wp-content/uploads/2014/02/FOMCH_ICON.png" alt="" class="circle large">
 <% end %>
 
 <h5> 
   <a href="/organizations/<%= organization.id %>" > <%= organization.name %> 
-
   </a> 
 </h5>
 
@@ -17,5 +16,8 @@
     Phone Number: <%= organization.phone_number %>
   <% end %>
 </p> 
-
-<div class="cardcenter"> <img class="activator" src="/images/cardpic.jpg" > </div>
+<% if  request.fullpath == '/organizations'%>
+  <div class="cardcenter"> 
+    <img class="activator" src="/images/cardpic.jpg" > 
+  </div>
+<% end %>
