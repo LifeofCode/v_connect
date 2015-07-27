@@ -102,6 +102,7 @@ footer.page-footer {
 {
   margin: 0 1em 0 1em;
   font-family: 'Sansita One', cursive;
+  font-size: 5em;
   color: #9900CC;
   text-shadow: rgb(204, 204, 204) 1px 1px 0px, rgb(204, 204, 204) 2px 2px 0px, rgb(68, 68, 68) 3px 3px 0px, rgb(68, 68, 68) 4px 4px 0px, rgb(68, 68, 68) 5px 5px 0px, rgb(68, 68, 68) 6px 6px 0px;
 }
