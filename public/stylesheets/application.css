@@ -37,7 +37,7 @@
 
 .entire-login-page {
   text-align: center;
-  margin-top: 15em;
+  margin-top: 5em;
 }
 
 .card .card-title-dark {
@@ -158,5 +158,19 @@ nav {
 
 .addopp{
   display: inline;
+}
+
+
+/* 'button' color */
+.btn {
+  background-color: indigo;
+}
+
+.btn:hover{
+  background-color: lightblue;
+}
+/* form text field */
+input[type=text]:focus, textarea:focus { 
+  border-bottom: 3px solid lightblue
 }
 
