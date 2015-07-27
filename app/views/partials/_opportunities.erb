@@ -1,6 +1,20 @@
-<h4><%= opportunity.title %></h4>
-<p><%= opportunity.content %></p>
+<li>
+  <h4 class="center indigo-text"><%= opportunity.title %></h4>
+</li>
+<li>
+  <p class="psize center"><%= opportunity.content %></p>
+</li>
+<% if !current_org? %>
+  <p class="psize center"><strong> Organization: </strong>
+    <a href="/organizations/<%= opportunity.organization.id%>" ><%= opportunity.organization.name %>
+    </a>
+  </p>
+<% end %>
 <% if current_org? %>
   <a href='/organizations/opportunities/<%=opportunity.id%>/edit'> Edit opportunity </a>
   <a href='/organizations/opportunities/<%=opportunity.id%>/delete'> Delete opportunity </a>
 <% end %>
+
+<div class="oppcardcenter"> 
+  <img class="activator" src="/images/cardpic.jpg" > 
+</div>

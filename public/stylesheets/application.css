@@ -99,18 +99,23 @@ footer.page-footer {
 }
 
 /* List Heading */
-h1.center {
+.headingcenter {
   margin-top: 0em;
-  margin-left: 5em;
-  margin-right: 6em;
+  margin-left: 14em;
+  margin-right: 5em;
   padding-top: 1em;
 }
 
 .cardcenter {
   width: 25em;
-  padding-top: 3em; 
+  padding-top: 5em; 
   padding-right: 35em;
   margin-left: -3em;
+}
+
+.oppcardcenter {
+  width: 25em; 
+  margin-left: 2em;
 }
 
 .psize {
@@ -119,7 +124,7 @@ h1.center {
 
 nav {
   background-color: #9900CC;
-}
+} 
 
 .layoutcolor {
   background-color: floralwhite;
@@ -128,3 +133,4 @@ nav {
 .h {
   font-color: #44C6F2;
 }
+
