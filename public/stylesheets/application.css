@@ -66,6 +66,7 @@
   background-image: url('/images/shutterstock-volunteer-1286x334.jpg');
   background-position: center center, center top;
   background-repeat: no-repeat;
+  background-color: white;
   min-height: 334px;
   box-shadow: 0px 0px 20px 0px #888888;
   position: relative;
@@ -169,8 +170,7 @@ nav {
 .btn:hover{
   background-color: lightblue;
 }
-/* form text field */
-input[type=text]:focus, textarea:focus { 
-  border-bottom: 3px solid lightblue
-}
 
+.btn:active{
+  background-color: lightblue;
+}
