@@ -11,16 +11,16 @@
             <h5> <%= @student.about %> </h5>
             <br>
           <% end %>
-          <strong> Email: </strong> <br> 
+          <p class="psize"> <strong> Email: </strong> <br> 
           <%= @student.email%>  
           <% if !@student.phone_number.blank? %>
             <strong> Phone Number: </strong> 
           <%= @student.phone_number%>
-          <% end %>
+          <% end %></p>
           <br>
           <br>
           <% if current_student? %>
-            <div class="card-action">
+            <div class="card-action left">
               <a href='/students/edit'>Edit Profile</a>
             </div>
           <% end %>
@@ -37,15 +37,15 @@
             <a href = '/students/opportunities'>See Opportunities</a>
           </div>
           <% @organizations.each do |organization| %>
+            <form method="post" action="/favourite">
+              <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
+            </form>
             <%= erb :'/partials/_show_organization', locals: { organization: organization } %>
-          <form method="post" action="/favourite">
-            <%= erb :'partials/_unfavourite_button', locals: { organization: organization } %>
-          </form>
           <% end %>
           <% else %>
             <span class="card-title-dark">You haven't favourited any organizations yet</span>          <br>
             <br>
-          <div class="card-action">
+          <div class="card-action left">
             <a href="/organizations">Browse Organizations</a></h3>
           </div>   
         <% end %>

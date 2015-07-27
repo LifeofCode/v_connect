@@ -1,7 +1,23 @@
-<div> 
-  <h5><a href="/organizations/<%= organization.id %>" > <%= organization.name %> </a></h5>
-  <p><strong> Email: </strong> <%= organization.email %></p> 
+<% if !organization.picture.blank? && request.fullpath == '/organizations' %>
+  <img src="<%= organization.picture %>" alt="" class="circle">
+<% elsif request.fullpath == '/organizations' %>
+  <img src="http://canyonlandscarecenter.org/wp-content/uploads/2014/02/FOMCH_ICON.png" alt="" class="circle large">
+<% end %>
+
+<h5> 
+  <a href="/organizations/<%= organization.id %>" > <%= organization.name %> 
+
+  </a> 
+</h5>
+
+<p class="psize"> 
+  <span class="badge">All Likes: <%= organization.favourites_count %></span>
+  Email: <%= organization.email %> </br>
   <% if organization.phone_number %>
-    <p> <strong> Phone Number: </strong> <%= organization.phone_number %> </p>
+    Phone Number: <%= organization.phone_number %>
   <% end %>
-</div>  
+</p> 
+
+<% if request.fullpath == '/organizations' %>
+  <div class="cardcenter"> <img class="activator" src="/images/cardpic.jpg" > </div>
+<% end %>

@@ -17,9 +17,7 @@ end
 
 # student sign up page
 get '/students/register' do
-  # redirect to profile page if user is already logged in
   logged_in!
-  # create a blank student so entered data can be saved when registration fails
   @student = Student.new
   erb :'students/new'
 end
@@ -71,7 +69,6 @@ post '/students' do
   @student = Student.new(params[:student])
   @student.password = params[:password]
   @student.password_confirmation = params[:password2]
-
   if @student.save
     login_user(@student.id, 'student')
   else
@@ -110,15 +107,8 @@ post '/favourite' do
       student_id: session[:id],
       organization_id: params[:organization_id]
     )
-  if @new_fav.save
-    redirect '/organizations'
-  else
-    @errors = @new_fav.errors.messages[:student]
-  # TODO: dry this out
-    check_favourite
-    @organizations = Organization.all
-    erb :'organizations/index'
-  end
+  @new_fav.save if @new_fav
+  redirect "#{params[:redirect]}"
 end
 
 delete '/favourite' do
@@ -127,9 +117,6 @@ delete '/favourite' do
     student_id: session[:id], 
     organization_id: params[:organization_id]
   )
-  # TODO: prevent redirect to blank page when 
-  if @favourite
-    @favourite.destroy 
-    redirect "#{params[:redirect]}"
-  end
+  @favourite.destroy if @favourite
+  redirect "#{params[:redirect]}"
 end

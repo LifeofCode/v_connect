@@ -45,8 +45,6 @@ get '/organizations/edit' do
   erb :'/organizations/edit'
 end
 
-
-
 # list opportunities by organization
 get '/organizations/opportunities' do
   auth_org!
@@ -85,9 +83,6 @@ get '/organizations/opportunities/:id/delete' do
   redirect '/organizations/opportunities'
 end
 
-
-
-
 # create new organization
 post '/organizations' do
   @organization = Organization.new(params[:org])
@@ -112,15 +107,12 @@ post '/organizations/session' do
   end
 end
 
-
-
 post '/organizations/opportunities/new' do
     @opportunity = Opportunity.new
     @opportunity.title = params[:title]
     @opportunity.content = params[:content]
     @opportunity.organization_id = current_org.id
     @organization = current_org
-
   if @opportunity.save
     redirect '/organizations/opportunities'
   else
@@ -135,7 +127,6 @@ post '/organizations/opportunities/:id/edit' do
     @opportunity.title = params[:title]
     @opportunity.content = params[:content]
     @opportunity.organization_id = current_org.id
-
   if @opportunity.save
     redirect '/organizations/opportunities'
   else
