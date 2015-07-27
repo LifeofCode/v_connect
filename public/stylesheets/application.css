@@ -128,3 +128,12 @@ nav {
 .h {
   font-color: #44C6F2;
 }
+
+/* 'button' color */
+.btn {
+  background-color: indigo;
+}
+
+.btn:hover{
+  background-color: lightblue;
+}

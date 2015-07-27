@@ -1,3 +1,7 @@
-<form method="post" action="/organizations/opportunities/new">
-  <%= erb :'partials/_form' %>
-</form>
+<div class = 'container'>
+  <h2>Create New Opportunity</h2>
+  <%= erb :'partials/_errors' %>
+  <form method="post" action="/organizations/opportunities/new">
+    <%= erb :'partials/_form' %>
+  </form>
+</div>

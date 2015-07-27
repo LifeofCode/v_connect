@@ -1,33 +1,31 @@
 <div class="site-content">
-<% if !(current_student? || current_org?) %>
-<!-- login and register -->
-<div class="container">
-  <div class="row home-login">
-    <div class="col s6 center">
-      <h3 class="header">Student</h3>
-      <a href='students/register' class="waves-effect waves-light btn">register</a>
-      <a href='students/session' class="waves-effect waves-light btn">login</a>
-    </div><!-- student col -->
-    <div class="col s6 center">
-      <h3 class="header">Organization</h3>
-      <a href='organizations/register' class="waves-effect waves-light btn">register</a>
-      <a href='organizations/session' class="waves-effect waves-light btn">login</a>
-    </div><!-- organization col -->
+  <% if !(current_student? || current_org?) %>
+  <!-- login and register -->
+  <div class="container">
+    <div class="row home-login">
+      <div class="col s6 center">
+        <h3 class="header">Student</h3>
+        <a href='students/register' class="waves-effect waves-light btn">register</a>
+        <a href='students/session' class="waves-effect waves-light btn">login</a>
+      </div><!-- student col -->
+      <div class="col s6 center">
+        <h3 class="header">Organization</h3>
+        <a href='organizations/register' class="waves-effect waves-light btn">register</a>
+        <a href='organizations/session' class="waves-effect waves-light btn">login</a>
+      </div><!-- organization col -->
+    </div>
+  </div><!-- .container -->
+  <% end %>
+
+
+  <!-- banner -->
+  <div class="center">
+    <div class='bgimg'></div> 
+    <div class="row home-login">
+      <h3 class="logo-effect">V Connect</h3>
+      <h5>Connect Volunteers with Non-Profits</h5>
+    </div>
   </div>
-</div><!-- .container -->
-<% end %>
-
-
-<!-- banner -->
-<div class="center">
-  <div class='bgimg'></div> 
-  <div class="row home-login">
-    <h3 class="logo-effect">V Connect</h3>
-    <h5>Connect Volunteers with Non-Profits</h5>
-  </div>
-
-</div>
-
 <%= erb :'/_promo' %>
 </div><!-- .wrapper -->
 
