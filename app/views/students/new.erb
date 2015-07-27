@@ -1,7 +1,7 @@
 <div class="entire-login-page">
   <h2>Register</h2>
-  <%= erb :'partials/_errors' %>
   <div class="form-login">
+    <%= erb :'partials/_errors' %>
     <form method="post" action="/students">
       <div class="form-group">
         <input type="text" name="student[first_name]" class="form-control" placeholder="First Name" value=<%= @student.first_name %>>

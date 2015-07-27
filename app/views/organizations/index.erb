@@ -1,7 +1,5 @@
-<%= erb :'partials/_errors' %>
-<div class="layoutcolor" >
 <h1 class="center dark-grey-text"> Registered Organizations</h1>  
-
+<div class="container"><%= erb :'partials/_errors' %></div>
 <% @organizations.each do |organization| %>
   <div class="contain"> 
   <ul class="collection card small z-depth-5">
@@ -20,5 +18,5 @@
   </ul>
   </div>  
 <% end %>
-</div>
+
 

@@ -37,7 +37,7 @@
 
 .entire-login-page {
   text-align: center;
-  margin-top: 15em;
+  margin-top: 5em;
 }
 
 .bar-space {
@@ -136,4 +136,8 @@ nav {
 
 .btn:hover{
   background-color: lightblue;
+}
+/* form text field */
+input[type=text]:focus, textarea:focus { 
+  border-bottom: 3px solid lightblue
 }
