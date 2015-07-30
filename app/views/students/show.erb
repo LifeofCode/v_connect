@@ -1,9 +1,15 @@
 <div class="row">
   <div class="col s4 offset-s1">
     <div class="card blue">
-    <div class="card-image">
-      <img class="responsive-img image-card" src="https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg">
-    </div>
+    <% if @student.profile_pic %>
+      <div class="card-image">
+        <img class="responsive-img image-card" src="<%=@student.profile_pic %>">
+      </div>
+    <% else %>
+      <div class="card-image">
+        <img class="responsive-img image-card" src="https://thebenclark.files.wordpress.com/2014/03/facebook-default-no-profile-pic.jpg">
+      </div>
+    <% end %>
       <div class="card-content white-text">
         <span class="card-title"><%= @student.first_name%> <%= @student.last_name %></span>    
           <br>
@@ -12,16 +18,16 @@
             <br>
           <% end %>
           <p class="psize"> <strong> Email: </strong> <br> 
-          <%= @student.email%>  
+          <%= @student.email%>  <br>
           <% if !@student.phone_number.blank? %>
-            <strong> Phone Number: </strong> 
+            <strong> Phone Number: </strong> <br>
           <%= @student.phone_number%>
           <% end %></p>
           <br>
           <br>
           <% if current_student? %>
             <div class="card-action left">
-              <a href='/students/edit'>Edit Profile</a>
+              <p class="psize"> <a href='/students/edit'>Edit Profile</a> </p>
             </div>
           <% end %>
       </div>
@@ -35,7 +41,7 @@
           <% if @organizations.any? %>
             <span class="card-title-dark">Favourite Organizations</span>
             <div class="card-action">
-              <a href = '/students/opportunities'>See Opportunities</a>
+              <p class="psize"> <a href = '/students/opportunities'>See Opportunities</a> </p>
             </div>
             <% @organizations.each do |organization| %>
               <form method="post" action="/favourite">
